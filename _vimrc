@@ -1,3 +1,15 @@
+" -------------------------------------
+"  Maintainer:
+"     Mathieu St-Vincent 
+"
+"  Inspired_by:
+"     https://github.com/dwieeb
+" -------------------------------------
+
+
+" -------------------------------------
+"  General settings
+" -------------------------------------
 set nocompatible
 
 " Infect !
@@ -54,9 +66,14 @@ colorscheme molokai
 
 let g:airline_theme = 'molokai'
 
-set laststatus=2
-set ttimeoutlen=50
+" Font style
+if has('gui_running')
+  set guifont=Inconsolata:h11
+endif
 
+" Windows GVIM plugin enabler
+set laststatus=2
+set ttimeoutlen=50 
 
 " -------------------------------------
 "  File & backup settings
@@ -79,3 +96,16 @@ set shiftwidth=2
 set autoindent
 set nowrap
 set textwidth=0
+
+" -------------------------------------
+"  Keyboard shortcuts
+" -------------------------------------
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<SR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
