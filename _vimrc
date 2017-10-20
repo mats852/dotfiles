@@ -10,48 +10,84 @@
 " -------------------------------------
 "  General settings
 " -------------------------------------
+
 set nocompatible
+filetype off                  " required
+filetype plugin indent on     " required
 
-" Infect !
-execute pathogen#infect()
 
-" Filetype plugins
-filetype plugin on
-filetype indent on
+" -------------------------------------
+"  Plugins Settings 
+" -------------------------------------
 
-" Set autoread when a file is changed from the outside
-set autoread
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" Show current position
-set ruler
+Plugin 'VundleVim/Vundle.vim'
 
-" Configure workspace so it works as it should
-set backspace=indent,eol,start
-set whichwrap+=<,>,h,l
+Plugin 'valloric/youcompleteme'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'bling/vim-airline'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'raimondi/delimitmate'
 
-" Ignore case when searching
-set smartcase
+" Languages
+Plugin 'othree/html5.vim'
+Plugin 'stanangeloff/php.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'isruslan/vim-es6'
+Plugin 'mxw/vim-jsx'
+Plugin 'keith/swift.vim'
+Plugin 'tpope/vim-haml'                 " Haml, Sass, SCSS
+Plugin 'elzr/vim-json'
+Plugin 'chase/vim-ansible-yaml'
+Plugin 'moll/vim-node'
+Plugin 'suan/vim-instant-markdown'
 
-" Highlight search results
-set hlsearch
+" Color Schemes
+Plugin 'tomasr/molokai'
+Plugin 'crusoexia/vim-monokai'
+Plugin 'morhetz/gruvbox'
+Plugin 'sonph/onehalf'
+Plugin 'whatyouhide/vim-gotham'
+Plugin 'cocopon/iceberg.vim'
 
-" Makes search act like search in modern browsers
-set incsearch
+call vundle#end()
 
-" For regular expressions turn magic on
-set magic
+" Set NERDTree shortcut
+map <C-n> :NERDTreeToggle<CR>
 
-" Show matching brackets when text indicator is over them
-set showmatch
+" Enable Emmet
+let g:user_emmet_mode='a'               "enable all function in all mode.
 
-" How many tenths of a second to blink when matching brackets
-set mat=2
+" JSX enabled in .js files
+let g:jsx_ext_required = 0
 
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
+" Php overriding highlighting
+function! PhpSyntaxOverride()
+  hi! def link phpDocTags  phpDefine
+  hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+  autocmd!
+  autocmd FileType php call PhpSyntaxOverride()
+augroup END
+
+
+" -------------------------------------
+"  END Plugins Settings 
+" -------------------------------------
+
+
+
 
 
 " -------------------------------------
@@ -61,41 +97,81 @@ set tm=500
 syntax enable
 set background=dark
 set t_Co=256
-let g:molokai_original = 1
-colorscheme molokai
+colorscheme gruvbox 
 
-let g:airline_theme = 'molokai'
 
-" Font style
-if has('gui_running')
-  set guifont=Inconsolata:h11
-endif
+" set true colors and add vim specific fixes
+set termguicolors
+set t_8f=[38;2;%lu;%lu;%lum
+set t_8b=[48;2;%lu;%lu;%lum
 
-" Windows GVIM plugin enabler
-set laststatus=2
-set ttimeoutlen=50 
+
+" -------------------------------------
+"  Interface settings
+" -------------------------------------
+
+set guifont=OperatorMono-Book:h16
+" For italic on operator mono
+highlight htmlArg gui=italic
+highlight htmlArg cterm=italic
+
+set ruler                               " Show current position
+set backspace=indent,eol,start          " Configure workspace so it works as it should
+set whichwrap+=<,>,h,l                  
+set magic                               " For regular expressions turn magic on
+set showmatch                           " Show matching brackets when text indicator is over them
+set mat=2                               " How many tenths of a second to blink when matching brackets
+set scrolloff=5                         " keep at least 5 lines above/below
+set noerrorbells                        " No annoying sound on errors
+set novisualbell
+set tm=500
+
 
 " -------------------------------------
 "  File & backup settings
 " -------------------------------------
 
-set nobackup
-set nowb
-set noswapfile
+set autoread                            " update file when changed outside of vim
+set autoindent                          " copy indentation from the previous line for new line
+set clipboard=unnamed                   " use native clipboard
+set history=200                         " store last 200 commands as history
+set nobackup                            " don't save backups
+set noerrorbells                        " no error bells please
+set noswapfile                          " no swapfiles
+set nowritebackup                       " don't save a backup while editing
+set lazyredraw                          " see if this fixes the slowness
+set ttyfast                             " indicates a fast terminal connection
+set undodir=~/.vim/undodir              " set undofile location
+set undofile                            " maintain undo history between sessions
+set undolevels=1000                     " store 1000 undos
+
 
 " -------------------------------------
 "  Text settings
 " -------------------------------------
 
+set nowrap                              " don't wrap my text !
+
 " Use spaces, damn it!
-set expandtab
-set smarttab
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set autoindent
-set nowrap
-set textwidth=0
+set expandtab                           " use tabs instead of spaces
+set nojoinspaces                        " use one space, not two, after punctuation
+set shiftround                          " shift to next tabstop
+set shiftwidth=2                        " amount of space used for indentation
+set softtabstop=2                       " appearance of tabs
+set tabstop=2                           " use two spaces for tabs
+
+" searching
+set hlsearch                            " highlight search matches
+set ignorecase                          " set case insensitive searching
+set incsearch                           " find as you type search
+set smartcase                           " case sensitive searching when not all lowercase
+
+" character encoding
+if !&readonly && &modifiable
+  set fileencoding=utf-8              " the encoding written to file
+endif
+set encoding=utf-8                    " the encoding displayed
+
 
 " -------------------------------------
 "  Keyboard shortcuts
@@ -104,8 +180,10 @@ set textwidth=0
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<SR>
 function! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+if !exists("*synstack")
+return
+endif
+echo map(synstack(line('.'), col('.')), 'synIDattr(v:val,
+"name")')
 endfunc
+
