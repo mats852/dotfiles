@@ -50,6 +50,7 @@ Plugin 'elzr/vim-json'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'moll/vim-node'
 Plugin 'suan/vim-instant-markdown'
+Plugin 'elixir-lang/vim-elixir'
 
 " Color Schemes
 Plugin 'tomasr/molokai'
@@ -133,7 +134,6 @@ set tm=500
 
 set autoread                            " update file when changed outside of vim
 set autoindent                          " copy indentation from the previous line for new line
-set clipboard=unnamed                   " use native clipboard
 set history=200                         " store last 200 commands as history
 set nobackup                            " don't save backups
 set noerrorbells                        " no error bells please
@@ -156,9 +156,9 @@ set nowrap                              " don't wrap my text !
 set expandtab                           " use tabs instead of spaces
 set nojoinspaces                        " use one space, not two, after punctuation
 set shiftround                          " shift to next tabstop
-set shiftwidth=2                        " amount of space used for indentation
-set softtabstop=2                       " appearance of tabs
-set tabstop=2                           " use two spaces for tabs
+set shiftwidth=4                        " amount of space used for indentation
+set softtabstop=4                       " appearance of tabs
+set tabstop=4                           " use two spaces for tabs
 
 " searching
 set hlsearch                            " highlight search matches
@@ -186,4 +186,6 @@ endif
 echo map(synstack(line('.'), col('.')), 'synIDattr(v:val,
 "name")')
 endfunc
+
+
 
