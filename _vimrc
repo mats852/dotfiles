@@ -36,21 +36,21 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'raimondi/delimitmate'
+Plugin 'junegunn/fzf'
 
 " Languages
 Plugin 'othree/html5.vim'
 Plugin 'stanangeloff/php.vim'
+Plugin 'stephpy/vim-php-cs-fixer'
 Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'isruslan/vim-es6'
 Plugin 'mxw/vim-jsx'
-Plugin 'keith/swift.vim'
 Plugin 'tpope/vim-haml'                 " Haml, Sass, SCSS
 Plugin 'elzr/vim-json'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'moll/vim-node'
 Plugin 'suan/vim-instant-markdown'
-Plugin 'elixir-lang/vim-elixir'
 
 " Color Schemes
 Plugin 'tomasr/molokai'
@@ -82,8 +82,11 @@ augroup phpSyntaxOverride
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
+" Enable FZF
+set rtp+=/usr/local/opt/fzf
 
-" -------------------------------------
+
+ -------------------------------------
 "  END Plugins Settings 
 " -------------------------------------
 
@@ -186,6 +189,3 @@ endif
 echo map(synstack(line('.'), col('.')), 'synIDattr(v:val,
 "name")')
 endfunc
-
-
-
