@@ -54,6 +54,9 @@ Plugin 'othree/html5.vim'
 " PHP
 Plugin 'stanangeloff/php.vim'
 Plugin 'stephpy/vim-php-cs-fixer'
+Plugin 'lumiliet/vim-twig'
+Plugin 'rodnaph/jinja.vim'              " This enables HTML in Twig
+
 " Styling
 Plugin 'tpope/vim-haml'                 " Haml, Sass, SCSS
 Plugin 'groenewege/vim-less'
@@ -109,7 +112,6 @@ augroup END
 
 " Enable FZF
 set rtp+=/usr/local/opt/fzf
-
 
 
 " -------------------------------------

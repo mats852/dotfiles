@@ -2,7 +2,8 @@
 "  Maintainer:
 "     Mathieu St-Vincent
 " -------------------------------------
-"
+
+
 "  " -------------------------------------
 "  General settings
 " -------------------------------------
@@ -28,6 +29,8 @@ else
   Plugin 'Shougo/deoplete.nvim'
 endif
 
+
+Plugin 'w0rp/ale'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdtree'
@@ -38,28 +41,48 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
-Plugin 'raimondi/delimitmate'
 Plugin 'junegunn/fzf'
+Plugin 'raimondi/delimitmate'
+Plugin 'quramy/tsuquyomi'
+
+
 
 " Languages
+" ------------------------
+
+" Html
+Plugin 'digitaltoad/vim-jade'
 Plugin 'othree/html5.vim'
+" PHP
 Plugin 'stanangeloff/php.vim'
 Plugin 'stephpy/vim-php-cs-fixer'
+Plugin 'lumiliet/vim-twig'
+Plugin 'rodnaph/jinja.vim'              " This enables HTML in Twig
+
+" Styling
+Plugin 'tpope/vim-haml'                 " Haml, Sass, SCSS
+Plugin 'groenewege/vim-less'
+" Javascript
 Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'moll/vim-node'
 Plugin 'isruslan/vim-es6'
-Plugin 'mxw/vim-jsx'
-Plugin 'tpope/vim-haml'                 " Haml, Sass, SCSS
 Plugin 'elzr/vim-json'
 Plugin 'chase/vim-ansible-yaml'
-Plugin 'moll/vim-node'
+Plugin 'mxw/vim-jsx'
+" Markdown
 Plugin 'suan/vim-instant-markdown'
+" Liquid
+Plugin 'tpope/vim-liquid'
+
+
 
 " Color Schemes
+" ------------------------
+Plugin 'MenkeTechnologies/VimColorSchemes'
+Plugin 'joshdick/onedark.vim'
 Plugin 'tomasr/molokai'
-Plugin 'crusoexia/vim-monokai'
 Plugin 'morhetz/gruvbox'
-Plugin 'sonph/onehalf'
 Plugin 'whatyouhide/vim-gotham'
 Plugin 'cocopon/iceberg.vim'
 
@@ -112,7 +135,7 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 syntax enable
 set background=dark
 set t_Co=256
-colorscheme gruvbox 
+colorscheme onedark
 
 
 " set true colors and add vim specific fixes
@@ -127,9 +150,12 @@ set t_8b=[48;2;%lu;%lu;%lum
 
 set guifont=OperatorMono-Book:h16
 " For italic on operator mono
+highlight Comment gui=italic
+highlight Comment cterm=italic
 highlight htmlArg gui=italic
 highlight htmlArg cterm=italic
 
+set mouse=a                             " Activates the mouse
 set ruler                               " Show current position
 set backspace=indent,eol,start          " Configure workspace so it works as it should
 set whichwrap+=<,>,h,l                  
@@ -173,6 +199,9 @@ set shiftround                          " shift to next tabstop
 set shiftwidth=4                        " amount of space used for indentation
 set softtabstop=4                       " appearance of tabs
 set tabstop=4                           " use two spaces for tabs
+
+" Text options
+set formatoptions-=cro                  " prevent next line comments
 
 " searching
 set hlsearch                            " highlight search matches
