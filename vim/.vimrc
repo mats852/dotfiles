@@ -13,8 +13,7 @@
 
 set nocompatible
 filetype off                  " required
-filetype plugin indent on     " required
-
+filetype plugin indent on     " required 
 
 " -------------------------------------
 "  Plugins Settings 
@@ -28,7 +27,14 @@ Plugin 'VundleVim/Vundle.vim'
 " UI and functionalities
 " ------------------------
 
-Plugin 'valloric/youcompleteme'
+if has('nvim')
+  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plugin 'Shougo/deoplete.nvim'
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+
 Plugin 'w0rp/ale'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
@@ -54,9 +60,7 @@ Plugin 'othree/html5.vim'
 " PHP
 Plugin 'stanangeloff/php.vim'
 Plugin 'stephpy/vim-php-cs-fixer'
-Plugin 'lumiliet/vim-twig'
-Plugin 'rodnaph/jinja.vim'              " This enables HTML in Twig
-
+Plugin 'nelsyeung/twig.vim'
 " Styling
 Plugin 'tpope/vim-haml'                 " Haml, Sass, SCSS
 Plugin 'groenewege/vim-less'
@@ -90,6 +94,9 @@ call vundle#end()
 " Enablers and settings
 " ------------------------
 
+" Autostart Deoplete
+let g:deoplete#enable_at_startup = 1
+
 " Set NERDTree shortcut
 map <C-n> :NERDTreeToggle<CR>
 
@@ -113,6 +120,14 @@ augroup END
 " Enable FZF
 set rtp+=/usr/local/opt/fzf
 
+" NERDTree show hidden files
+let NERDTreeShowHidden=1
+
+" Make TSX files work plez
+autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
+
+" Make .twig files work
+autocmd BufNewFile,BufRead *.twig setlocal filetype=html.twig.js.css
 
 " -------------------------------------
 "  END Plugins Settings 
@@ -120,30 +135,35 @@ set rtp+=/usr/local/opt/fzf
 
 
 
-
-
 " -------------------------------------
 "  Appearance settings
 " -------------------------------------
 
-syntax enable
+syntax on
 set background=dark
-set t_Co=256
 colorscheme onedark
 
+let g:onedark_termcolors=256
+let g:airline_theme='onedark'
 
 " set true colors and add vim specific fixes
 set termguicolors
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+
+set t_Co=256
+
+set guifont=OperatorMono-Book:h18
+" For italic on operator mono
+highlight Comment gui=italic
+highlight Comment cterm=italic
+highlight htmlArg gui=italic
+highlight htmlArg cterm=italic
 
 
 " -------------------------------------
 "  Interface settings
 " -------------------------------------
-
-set guifont=Fira\ Code:h14
-" For italic on operator mono
-highlight htmlArg gui=italic
-highlight htmlArg cterm=italic
 
 set mouse=a                             " Activates the mouse
 set ruler                               " Show current position
@@ -201,21 +221,37 @@ set smartcase                           " case sensitive searching when not all 
 
 " character encoding
 if !&readonly && &modifiable
-  set fileencoding=utf-8              " the encoding written to file
+  set fileencoding=utf-8                " the encoding written to file
 endif
-set encoding=utf-8                    " the encoding displayed
+set encoding=utf-8                      " the encoding displayed
+ 
 
 
 " -------------------------------------
-"  Keyboard shortcuts
+"  Autocmd Rules
 " -------------------------------------
 
-" Show syntax highlighting groups for word under cursor
-nmap <C-S-P> :call <SID>SynStack()<SR>
-function! <SID>SynStack()
-if !exists("*synstack")
-return
-endif
-echo map(synstack(line('.'), col('.')), 'synIDattr(v:val,
-"name")')
-endfunc
+" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
+augroup vimrc-sync-fromstart
+  autocmd!
+  autocmd BufEnter * :syntax sync maxlines=200
+augroup END
+
+" Remember cursor position
+augroup vimrc-remember-cursor-position
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup END
+
+" txt
+augroup vimrc-wrapping
+  autocmd!
+  autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
+augroup END
+
+" make/cmake
+augroup vimrc-make-cmake
+  autocmd!
+  autocmd FileType make setlocal noexpandtab
+  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
+augroup END
