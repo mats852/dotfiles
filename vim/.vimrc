@@ -27,14 +27,6 @@ Plugin 'VundleVim/Vundle.vim'
 " UI and functionalities
 " ------------------------
 
-if has('nvim')
-  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plugin 'Shougo/deoplete.nvim'
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
-endif
-
 Plugin 'w0rp/ale'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
@@ -54,6 +46,11 @@ Plugin 'quramy/tsuquyomi'
 " Languages
 " ------------------------
 
+" Elixir
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'slashmili/alchemist.vim'
+" Elm
+Plugin 'elmcast/elm-vim'
 " Html
 Plugin 'digitaltoad/vim-jade'
 Plugin 'othree/html5.vim'
@@ -128,6 +125,9 @@ autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
 
 " Make .twig files work
 autocmd BufNewFile,BufRead *.twig setlocal filetype=html.twig.js.css
+
+" Make Elixir files work
+autocmd BufNewFile,BufRead *.ex, *.exs, .eex setlocal filetype=elixir
 
 " -------------------------------------
 "  END Plugins Settings 
@@ -208,7 +208,7 @@ set nojoinspaces                        " use one space, not two, after punctuat
 set shiftround                          " shift to next tabstop
 set shiftwidth=4                        " amount of space used for indentation
 set softtabstop=4                       " appearance of tabs
-set tabstop=4                           " use two spaces for tabs
+set tabstop=4                           " use four spaces for tabs
 "
 " Text options
 set formatoptions-=cro                  " prevent next line comments
