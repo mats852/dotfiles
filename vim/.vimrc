@@ -27,6 +27,7 @@ Plugin 'VundleVim/Vundle.vim'
 " UI and functionalities
 " ------------------------
 
+Plugin 'valloric/youcompleteme'
 Plugin 'w0rp/ale'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
@@ -40,6 +41,8 @@ Plugin 'mattn/emmet-vim'
 Plugin 'junegunn/fzf'
 Plugin 'raimondi/delimitmate'
 Plugin 'quramy/tsuquyomi'
+
+
 
 
 
