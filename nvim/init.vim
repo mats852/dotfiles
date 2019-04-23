@@ -4,7 +4,7 @@
 " -------------------------------------
 
 
-"  " -------------------------------------
+" -------------------------------------
 "  General settings
 " -------------------------------------
 
@@ -17,26 +17,24 @@ filetype plugin indent on     " required
 "  Plugins Settings 
 " -------------------------------------
 
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.local/share/nvim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plugin 'w0rp/ale'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'bling/vim-airline'
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'kien/ctrlp.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'junegunn/fzf'
-Plugin 'raimondi/delimitmate'
-Plugin 'quramy/tsuquyomi'
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'w0rp/ale'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdcommenter'
+Plug 'bling/vim-airline'
+Plug 'edkolev/tmuxline.vim'
+Plug 'majutsushi/tagbar'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'kien/ctrlp.vim'
+Plug 'mattn/emmet-vim'
+Plug 'junegunn/fzf'
+Plug 'raimondi/delimitmate'
+Plug 'quramy/tsuquyomi'
 
 
 
@@ -44,49 +42,47 @@ Plugin 'quramy/tsuquyomi'
 " ------------------------
 
 " Html
-Plugin 'digitaltoad/vim-jade'
-Plugin 'othree/html5.vim'
+Plug 'digitaltoad/vim-jade'
+Plug 'othree/html5.vim'
 " Styling
-Plugin 'tpope/vim-haml'                 " Haml, Sass, SCSS
-Plugin 'groenewege/vim-less'
-Plugin 'JulesWang/css.vim'
-Plugin 'hail2u/vim-css3-syntax'
+Plug 'tpope/vim-haml'                 " Haml, Sass, SCSS
+Plug 'groenewege/vim-less'
+Plug 'JulesWang/css.vim'
+Plug 'hail2u/vim-css3-syntax'
 " Javascript
-Plugin 'pangloss/vim-javascript'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'moll/vim-node'
-Plugin 'isruslan/vim-es6'
-Plugin 'elzr/vim-json'
-Plugin 'chase/vim-ansible-yaml'
-Plugin 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'moll/vim-node'
+Plug 'isruslan/vim-es6'
+Plug 'elzr/vim-json'
+Plug 'chase/vim-ansible-yaml'
+Plug 'mxw/vim-jsx'
+Plug 'posva/vim-vue'
 " Elm
-Plugin 'elmcast/elm-vim'
+Plug 'elmcast/elm-vim'
 " Markdown
-Plugin 'suan/vim-instant-markdown'
+Plug 'suan/vim-instant-markdown'
 " Liquid
-Plugin 'tpope/vim-liquid'
+Plug 'tpope/vim-liquid'
 " PHP
-Plugin 'stanangeloff/php.vim'
-Plugin 'stephpy/vim-php-cs-fixer'
-Plugin 'nelsyeung/twig.vim'
+Plug 'stanangeloff/php.vim'
+Plug 'stephpy/vim-php-cs-fixer'
+Plug 'nelsyeung/twig.vim'
 
 
 " Color Schemes
 " ------------------------
-Plugin 'MenkeTechnologies/VimColorSchemes'
-Plugin 'joshdick/onedark.vim'
-Plugin 'tomasr/molokai'
-Plugin 'morhetz/gruvbox'
-Plugin 'whatyouhide/vim-gotham'
-Plugin 'cocopon/iceberg.vim'
+Plug 'MenkeTechnologies/VimColorSchemes'
+Plug 'joshdick/onedark.vim'
+Plug 'tomasr/molokai'
+Plug 'morhetz/gruvbox'
+Plug 'whatyouhide/vim-gotham'
+Plug 'cocopon/iceberg.vim'
 
-call vundle#end()
+call plug#end()
 
 " Set NERDTree shortcut
 map <C-n> :NERDTreeToggle<CR>
-
-" Enable deoplete
-let g:deoplete#enable_at_startup = 1
 
 " Enable Emmet
 let g:user_emmet_mode='a'               "enable all function in all mode.
@@ -110,8 +106,8 @@ set rtp+=/usr/local/opt/fzf
 
 
 " Enable Python
-let g:python2_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+" let g:python2_host_prog = '/usr/local/bin/python'
+" let g:python3_host_prog = '/usr/local/bin/python3'
 
 " NERDTree show hidden files
 let NERDTreeShowHidden=1
@@ -140,7 +136,7 @@ autocmd BufNewFile,BufRead *.elm setlocal filetype=elm
 syntax enable
 set background=dark
 set t_Co=256
-colorscheme onedark
+colorscheme gruvbox
 
 
 " set true colors and add vim specific fixes
