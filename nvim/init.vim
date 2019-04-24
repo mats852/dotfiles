@@ -20,6 +20,7 @@ filetype plugin indent on     " required
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'shougo/denite.nvim'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -57,7 +58,6 @@ Plug 'isruslan/vim-es6'
 Plug 'elzr/vim-json'
 Plug 'chase/vim-ansible-yaml'
 Plug 'mxw/vim-jsx'
-Plug 'posva/vim-vue'
 " Elm
 Plug 'elmcast/elm-vim'
 " Markdown
@@ -81,12 +81,48 @@ Plug 'cocopon/iceberg.vim'
 
 call plug#end()
 
-" Set NERDTree shortcut
+
+" ===== NERDTree =====
 map <C-n> :NERDTreeToggle<CR>
 
-" Enable Emmet
+" ===== Emmet =====
 let g:user_emmet_mode='a'               "enable all function in all mode.
 
+
+" ===== Enable FZF =====
+set rtp+=/usr/local/opt/fzf
+
+
+" ===== NERDTree show hidden files =====
+let NERDTreeShowHidden=1
+
+
+" ===== Denite =====
+"   ;         - Browser currently open buffers
+"   <leader>t - Browse list of files in current directory
+"   <leader>g - Search current directory for occurences of given term and
+"   close window if no results
+"   <leader>j - Search current directory for occurences of word under cursor
+" nmap ; :Denite buffer -split=floating -winrow=1<CR>
+" nmap <leader>t :Denite file/rec -split=floating -winrow=1<CR>
+nnoremap <leader>g :<C-u>Denite grep:. -no-empty -mode=normal<CR>
+nnoremap <leader>j :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+
+
+" ===== Highlighting =====
+
+" Make Vue files work
+autocmd BufRead,BufNewFile *.vue setfiletype html
+
+" Make TSX files work plez
+autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
+
+" Make .twig files work
+autocmd BufNewFile,BufRead *.twig set filetype=html.twig
+
+" Make Elm files work plez
+autocmd BufNewFile,BufRead *.elm setlocal filetype=elm
+"
 " JSX enabled in .js files
 let g:jsx_ext_required = 0
 
@@ -101,25 +137,6 @@ augroup phpSyntaxOverride
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
-" Enable FZF
-set rtp+=/usr/local/opt/fzf
-
-
-" Enable Python
-" let g:python2_host_prog = '/usr/local/bin/python'
-" let g:python3_host_prog = '/usr/local/bin/python3'
-
-" NERDTree show hidden files
-let NERDTreeShowHidden=1
-
-" Make TSX files work plez
-autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
-
-" Make .twig files work
-autocmd BufNewFile,BufRead *.twig set filetype=html.twig
-
-" Make Elm files work plez
-autocmd BufNewFile,BufRead *.elm setlocal filetype=elm
 
 " -------------------------------------
 "  END Plugins Settings 
@@ -136,7 +153,7 @@ autocmd BufNewFile,BufRead *.elm setlocal filetype=elm
 syntax enable
 set background=dark
 set t_Co=256
-colorscheme gruvbox
+colorscheme onedark
 
 
 " set true colors and add vim specific fixes
@@ -151,10 +168,9 @@ set t_8b=[48;2;%lu;%lu;%lum
 
 set guifont=OperatorMono-Book:h16
 " For italic on operator mono
-highlight Comment gui=italic
-highlight Comment cterm=italic
-highlight htmlArg gui=italic
-highlight htmlArg cterm=italic
+hi Comment gui=italic cterm=italic
+hi htmlArg gui=italic cterm=italic
+
 
 set mouse=a                             " Activates the mouse
 set ruler                               " Show current position
