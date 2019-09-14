@@ -27,6 +27,7 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'majutsushi/tagbar'
@@ -82,6 +83,15 @@ Plug 'cocopon/iceberg.vim'
 call plug#end()
 
 
+" ===== w0rp/ALE =====
+nmap <F9> <Plug>(ale_fix)
+
+let g:ale_fixers = {
+\ 'javascript': ['eslint'],
+\ 'typescript': ['eslint'],
+\ 'vue': ['eslint']
+\ }
+
 " ===== NERDTree =====
 map <C-n> :NERDTreeToggle<CR>
 
@@ -95,6 +105,10 @@ set rtp+=/usr/local/opt/fzf
 
 " ===== NERDTree show hidden files =====
 let NERDTreeShowHidden=1
+
+
+" ===== Tagbar =====
+nmap <F8> :TagbarToggle<CR>
 
 
 " ===== Denite =====
@@ -153,7 +167,7 @@ augroup END
 syntax enable
 set background=dark
 set t_Co=256
-colorscheme onedark
+colorscheme molokai 
 
 
 " set true colors and add vim specific fixes
