@@ -73,7 +73,6 @@ Plug 'thosakwe/vim-flutter'
 
 " Color Schemes
 " ------------------------
-" Plug 'MenkeTechnologies/VimColorSchemes'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'joshdick/onedark.vim'
 Plug 'tomasr/molokai'
@@ -108,6 +107,9 @@ let NERDTreeShowHidden=1
 
 " ===== Tagbar =====
 nmap <F8> :TagbarToggle<CR>
+
+" For typescript support, install:
+" yarn global add git+https://github.com/Perlence/tstags.git
 
 let g:tagbar_type_typescript = {                                                  
   \ 'ctagsbin' : 'tstags',                                                        
