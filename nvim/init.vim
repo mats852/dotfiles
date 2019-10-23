@@ -36,7 +36,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf'
 Plug 'raimondi/delimitmate'
-Plug 'quramy/tsuquyomi'
 
 
 
@@ -54,31 +53,31 @@ Plug 'hail2u/vim-css3-syntax'
 " Javascript
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
+Plug 'quramy/tsuquyomi'
 Plug 'moll/vim-node'
 Plug 'isruslan/vim-es6'
 Plug 'elzr/vim-json'
 Plug 'chase/vim-ansible-yaml'
 Plug 'mxw/vim-jsx'
-" Elm
-Plug 'elmcast/elm-vim'
+Plug 'posva/vim-vue'
 " Markdown
 Plug 'suan/vim-instant-markdown'
-" Liquid
-Plug 'tpope/vim-liquid'
 " PHP
 Plug 'stanangeloff/php.vim'
 Plug 'stephpy/vim-php-cs-fixer'
 Plug 'nelsyeung/twig.vim'
+" Dart & Flutter
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
 
 
 " Color Schemes
 " ------------------------
-Plug 'MenkeTechnologies/VimColorSchemes'
+" Plug 'MenkeTechnologies/VimColorSchemes'
+Plug 'phanviet/vim-monokai-pro'
 Plug 'joshdick/onedark.vim'
 Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
-Plug 'whatyouhide/vim-gotham'
-Plug 'cocopon/iceberg.vim'
 
 call plug#end()
 
@@ -110,6 +109,24 @@ let NERDTreeShowHidden=1
 " ===== Tagbar =====
 nmap <F8> :TagbarToggle<CR>
 
+let g:tagbar_type_typescript = {                                                  
+  \ 'ctagsbin' : 'tstags',                                                        
+  \ 'ctagsargs' : '-f-',                                                           
+  \ 'kinds': [                                                                     
+    \ 'e:enums:0:1',                                                               
+    \ 'f:function:0:1',                                                            
+    \ 't:typealias:0:1',                                                           
+    \ 'M:Module:0:1',                                                              
+    \ 'I:import:0:1',                                                              
+    \ 'i:interface:0:1',                                                           
+    \ 'C:class:0:1',                                                               
+    \ 'm:method:0:1',                                                              
+    \ 'p:property:0:1',                                                            
+    \ 'v:variable:0:1',                                                            
+    \ 'c:const:0:1',                                                              
+  \ ],                                                                            
+  \ 'sort' : 0                                                                    
+\ }                                                                               
 
 " ===== Denite =====
 "   ;         - Browser currently open buffers
@@ -167,7 +184,7 @@ augroup END
 syntax enable
 set background=dark
 set t_Co=256
-colorscheme molokai 
+colorscheme onedark
 
 
 " set true colors and add vim specific fixes
