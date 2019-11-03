@@ -108,6 +108,9 @@ let NERDTreeShowHidden=1
 " ===== Tagbar =====
 nmap <F8> :TagbarToggle<CR>
 
+" For typescript support, install:
+" yarn global add git+https://github.com/Perlence/tstags.git
+
 let g:tagbar_type_typescript = {                                                  
   \ 'ctagsbin' : 'tstags',                                                        
   \ 'ctagsargs' : '-f-',                                                           
@@ -278,12 +281,6 @@ augroup vimrc-remember-cursor-position
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
-
-" txt
-" augroup vimrc-wrapping
-"   autocmd!
-"   autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
-" augroup END
 
 " make/cmake
 augroup vimrc-make-cmake
