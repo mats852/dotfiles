@@ -36,7 +36,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf'
 Plug 'raimondi/delimitmate'
-Plug 'quramy/tsuquyomi'
 
 
 
@@ -54,31 +53,30 @@ Plug 'hail2u/vim-css3-syntax'
 " Javascript
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
+Plug 'quramy/tsuquyomi'
 Plug 'moll/vim-node'
 Plug 'isruslan/vim-es6'
 Plug 'elzr/vim-json'
 Plug 'chase/vim-ansible-yaml'
 Plug 'mxw/vim-jsx'
-" Elm
-Plug 'elmcast/elm-vim'
+Plug 'posva/vim-vue'
 " Markdown
 Plug 'suan/vim-instant-markdown'
-" Liquid
-Plug 'tpope/vim-liquid'
 " PHP
 Plug 'stanangeloff/php.vim'
 Plug 'stephpy/vim-php-cs-fixer'
 Plug 'nelsyeung/twig.vim'
+" Dart & Flutter
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
 
 
 " Color Schemes
 " ------------------------
-Plug 'MenkeTechnologies/VimColorSchemes'
+Plug 'phanviet/vim-monokai-pro'
 Plug 'joshdick/onedark.vim'
 Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
-Plug 'whatyouhide/vim-gotham'
-Plug 'cocopon/iceberg.vim'
 
 call plug#end()
 
@@ -110,6 +108,27 @@ let NERDTreeShowHidden=1
 " ===== Tagbar =====
 nmap <F8> :TagbarToggle<CR>
 
+" For typescript support, install:
+" yarn global add git+https://github.com/Perlence/tstags.git
+
+let g:tagbar_type_typescript = {                                                  
+  \ 'ctagsbin' : 'tstags',                                                        
+  \ 'ctagsargs' : '-f-',                                                           
+  \ 'kinds': [                                                                     
+    \ 'e:enums:0:1',                                                               
+    \ 'f:function:0:1',                                                            
+    \ 't:typealias:0:1',                                                           
+    \ 'M:Module:0:1',                                                              
+    \ 'I:import:0:1',                                                              
+    \ 'i:interface:0:1',                                                           
+    \ 'C:class:0:1',                                                               
+    \ 'm:method:0:1',                                                              
+    \ 'p:property:0:1',                                                            
+    \ 'v:variable:0:1',                                                            
+    \ 'c:const:0:1',                                                              
+  \ ],                                                                            
+  \ 'sort' : 0                                                                    
+\ }                                                                               
 
 " ===== Denite =====
 "   ;         - Browser currently open buffers
@@ -119,8 +138,8 @@ nmap <F8> :TagbarToggle<CR>
 "   <leader>j - Search current directory for occurences of word under cursor
 " nmap ; :Denite buffer -split=floating -winrow=1<CR>
 " nmap <leader>t :Denite file/rec -split=floating -winrow=1<CR>
-nnoremap <leader>g :<C-u>Denite grep:. -no-empty -mode=normal<CR>
-nnoremap <leader>j :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
+nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
 
 
 " ===== Highlighting =====
@@ -167,7 +186,7 @@ augroup END
 syntax enable
 set background=dark
 set t_Co=256
-colorscheme molokai 
+colorscheme monokai_pro
 
 
 " set true colors and add vim specific fixes
@@ -224,12 +243,12 @@ set undolevels=1000                     " store 1000 undos
 set nowrap                              " don't wrap my text !
 
 " Use spaces, damn it!
-set expandtab                           " use tabs instead of spaces
+set expandtab                           " use spaces instead of tabs
 set nojoinspaces                        " use one space, not two, after punctuation
 set shiftround                          " shift to next tabstop
 set shiftwidth=4                        " amount of space used for indentation
 set softtabstop=4                       " appearance of tabs
-set tabstop=4                           " use two spaces for tabs
+set tabstop=4                           " use four spaces for tabs
 
 " Text options
 set formatoptions-=cro                  " prevent next line comments
@@ -251,22 +270,16 @@ set encoding=utf-8                    " the encoding displayed
 "  Autocmd Rules
 " -------------------------------------
 
-" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
+" The PC is fast enough, do syntax highlight syncing from start unless 1000 lines
 augroup vimrc-sync-fromstart
   autocmd!
-  autocmd BufEnter * :syntax sync maxlines=200
+  autocmd BufEnter * :syntax sync maxlines=1000
 augroup END
 
 " Remember cursor position
 augroup vimrc-remember-cursor-position
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-augroup END
-
-" txt
-augroup vimrc-wrapping
-  autocmd!
-  autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 augroup END
 
 " make/cmake
