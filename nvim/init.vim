@@ -3,7 +3,6 @@
 "     Mathieu St-Vincent
 " -------------------------------------
 
-
 " -------------------------------------
 "  General settings
 " -------------------------------------
@@ -19,25 +18,24 @@ filetype plugin indent on     " required
 
 call plug#begin('~/.local/share/nvim/plugged')
 
+" Automation
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'shougo/denite.nvim'
+Plug 'valloric/youcompleteme'
 Plug 'w0rp/ale'
+Plug 'scrooloose/syntastic'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'junegunn/fzf'
+Plug 'janko/vim-test'
+" UI
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdcommenter'
-Plug 'majutsushi/tagbar'
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
-Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'kien/ctrlp.vim'
-Plug 'mattn/emmet-vim'
-Plug 'junegunn/fzf'
+" Utils
+Plug 'scrooloose/nerdcommenter'
 Plug 'raimondi/delimitmate'
-
-
 
 " Languages
 " ------------------------
@@ -52,23 +50,22 @@ Plug 'JulesWang/css.vim'
 Plug 'hail2u/vim-css3-syntax'
 " Javascript
 Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'quramy/tsuquyomi'
 Plug 'moll/vim-node'
 Plug 'isruslan/vim-es6'
 Plug 'elzr/vim-json'
 Plug 'chase/vim-ansible-yaml'
 Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
+" Typescript
+Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'quramy/tsuquyomi'
 " Markdown
 Plug 'suan/vim-instant-markdown'
 " PHP
 Plug 'stanangeloff/php.vim'
 Plug 'stephpy/vim-php-cs-fixer'
 Plug 'nelsyeung/twig.vim'
-" Dart & Flutter
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'thosakwe/vim-flutter'
 
 
 " Color Schemes
@@ -77,18 +74,19 @@ Plug 'phanviet/vim-monokai-pro'
 Plug 'joshdick/onedark.vim'
 Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', {'as': 'dracula'}
 
 call plug#end()
 
-
 " ===== w0rp/ALE =====
-nmap <F9> <Plug>(ale_fix)
-
+let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \ 'javascript': ['eslint'],
 \ 'typescript': ['eslint'],
 \ 'vue': ['eslint']
 \ }
+
+nmap <F12> <Plug>(ale_fix)
 
 " ===== NERDTree =====
 map <C-n> :NERDTreeToggle<CR>
@@ -104,31 +102,6 @@ set rtp+=/usr/local/opt/fzf
 " ===== NERDTree show hidden files =====
 let NERDTreeShowHidden=1
 
-
-" ===== Tagbar =====
-nmap <F8> :TagbarToggle<CR>
-
-" For typescript support, install:
-" yarn global add git+https://github.com/Perlence/tstags.git
-
-let g:tagbar_type_typescript = {                                                  
-  \ 'ctagsbin' : 'tstags',                                                        
-  \ 'ctagsargs' : '-f-',                                                           
-  \ 'kinds': [                                                                     
-    \ 'e:enums:0:1',                                                               
-    \ 'f:function:0:1',                                                            
-    \ 't:typealias:0:1',                                                           
-    \ 'M:Module:0:1',                                                              
-    \ 'I:import:0:1',                                                              
-    \ 'i:interface:0:1',                                                           
-    \ 'C:class:0:1',                                                               
-    \ 'm:method:0:1',                                                              
-    \ 'p:property:0:1',                                                            
-    \ 'v:variable:0:1',                                                            
-    \ 'c:const:0:1',                                                              
-  \ ],                                                                            
-  \ 'sort' : 0                                                                    
-\ }                                                                               
 
 " ===== Denite =====
 "   ;         - Browser currently open buffers
@@ -148,7 +121,7 @@ nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
 autocmd BufRead,BufNewFile *.vue setfiletype html
 
 " Make TSX files work plez
-autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
+autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=javascript
 
 " Make .twig files work
 autocmd BufNewFile,BufRead *.twig set filetype=html.twig
@@ -186,7 +159,7 @@ augroup END
 syntax enable
 set background=dark
 set t_Co=256
-colorscheme monokai_pro
+colorscheme dracula 
 
 
 " set true colors and add vim specific fixes
@@ -246,9 +219,9 @@ set nowrap                              " don't wrap my text !
 set expandtab                           " use spaces instead of tabs
 set nojoinspaces                        " use one space, not two, after punctuation
 set shiftround                          " shift to next tabstop
-set shiftwidth=4                        " amount of space used for indentation
-set softtabstop=4                       " appearance of tabs
-set tabstop=4                           " use four spaces for tabs
+set shiftwidth=2                        " amount of space used for indentation
+set softtabstop=2                       " appearance of tabs
+set tabstop=2                           " use four spaces for tabs
 
 " Text options
 set formatoptions-=cro                  " prevent next line comments
