@@ -8,8 +8,8 @@
 " -------------------------------------
 
 set nocompatible
-filetype off                  " required
-filetype plugin indent on     " required
+filetype off
+filetype plugin indent on
 
 
 " -------------------------------------
@@ -19,11 +19,9 @@ filetype plugin indent on     " required
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Automation
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'valloric/youcompleteme'
 Plug 'w0rp/ale'
 Plug 'scrooloose/syntastic'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'junegunn/fzf'
 Plug 'janko/vim-test'
 " UI
@@ -40,28 +38,11 @@ Plug 'raimondi/delimitmate'
 " Languages
 " ------------------------
 
-" Html
-Plug 'digitaltoad/vim-jade'
-Plug 'othree/html5.vim'
-" Styling
-Plug 'tpope/vim-haml'                 " Haml, Sass, SCSS
-Plug 'groenewege/vim-less'
-Plug 'JulesWang/css.vim'
-Plug 'hail2u/vim-css3-syntax'
-" Javascript
-Plug 'pangloss/vim-javascript'
-Plug 'moll/vim-node'
-Plug 'isruslan/vim-es6'
-Plug 'elzr/vim-json'
-Plug 'chase/vim-ansible-yaml'
-Plug 'mxw/vim-jsx'
-Plug 'posva/vim-vue'
+" A lot of languages syntax & indent
+Plug 'sheerun/vim-polyglot'
 " Typescript
-Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
-Plug 'HerringtonDarkholme/yats.vim'
 Plug 'quramy/tsuquyomi'
-" Markdown
-Plug 'suan/vim-instant-markdown'
+Plug 'Quramy/vim-js-pretty-template'
 " PHP
 Plug 'stanangeloff/php.vim'
 Plug 'stephpy/vim-php-cs-fixer'
@@ -78,6 +59,13 @@ Plug 'dracula/vim', {'as': 'dracula'}
 
 call plug#end()
 
+
+" ===== vim-test =====
+let test#strategy = 'neovim'
+map <F9> :TestNearest
+map <F10> :TestFile
+
+
 " ===== w0rp/ALE =====
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
@@ -88,31 +76,18 @@ let g:ale_fixers = {
 
 nmap <F12> <Plug>(ale_fix)
 
+
 " ===== NERDTree =====
 map <C-n> :NERDTreeToggle<CR>
-
-" ===== Emmet =====
-let g:user_emmet_mode='a'               "enable all function in all mode.
 
 
 " ===== Enable FZF =====
 set rtp+=/usr/local/opt/fzf
+map <C-f> :FZF<CR>
 
 
 " ===== NERDTree show hidden files =====
 let NERDTreeShowHidden=1
-
-
-" ===== Denite =====
-"   ;         - Browser currently open buffers
-"   <leader>t - Browse list of files in current directory
-"   <leader>g - Search current directory for occurences of given term and
-"   close window if no results
-"   <leader>j - Search current directory for occurences of word under cursor
-" nmap ; :Denite buffer -split=floating -winrow=1<CR>
-" nmap <leader>t :Denite file/rec -split=floating -winrow=1<CR>
-nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
-nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
 
 
 " ===== Highlighting =====
@@ -120,17 +95,8 @@ nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
 " Make Vue files work
 autocmd BufRead,BufNewFile *.vue setfiletype html
 
-" Make TSX files work plez
-autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=javascript
-
 " Make .twig files work
 autocmd BufNewFile,BufRead *.twig set filetype=html.twig
-
-" Make Elm files work plez
-autocmd BufNewFile,BufRead *.elm setlocal filetype=elm
-"
-" JSX enabled in .js files
-let g:jsx_ext_required = 0
 
 " Php overriding highlighting
 function! PhpSyntaxOverride()
@@ -246,7 +212,7 @@ set encoding=utf-8                    " the encoding displayed
 " The PC is fast enough, do syntax highlight syncing from start unless 1000 lines
 augroup vimrc-sync-fromstart
   autocmd!
-  autocmd BufEnter * :syntax sync maxlines=1000
+  autocmd BufEnter * :syntax sync maxlines=1500
 augroup END
 
 " Remember cursor position
