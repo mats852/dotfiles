@@ -26,11 +26,13 @@ Plug 'junegunn/fzf'
 Plug 'janko/vim-test'
 " UI
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
 " Utils
 Plug 'scrooloose/nerdcommenter'
 Plug 'raimondi/delimitmate'
@@ -41,7 +43,7 @@ Plug 'raimondi/delimitmate'
 " A lot of languages syntax & indent
 Plug 'sheerun/vim-polyglot'
 " Typescript
-Plug 'quramy/tsuquyomi'
+" Plug 'quramytsuquyomi'
 Plug 'Quramy/vim-js-pretty-template'
 " PHP
 Plug 'stanangeloff/php.vim'
@@ -51,10 +53,12 @@ Plug 'nelsyeung/twig.vim'
 
 " Color Schemes
 " ------------------------
-Plug 'phanviet/vim-monokai-pro'
 Plug 'joshdick/onedark.vim'
 Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
+Plug 'franbach/miramare'
+Plug 'sainnhe/forest-night'
+Plug 'sainnhe/gruvbox-material'
 Plug 'dracula/vim', {'as': 'dracula'}
 
 call plug#end()
@@ -64,7 +68,6 @@ call plug#end()
 let test#strategy = 'neovim'
 map <F9> :TestNearest
 map <F10> :TestFile
-
 
 " ===== w0rp/ALE =====
 let g:ale_fix_on_save = 1
@@ -76,19 +79,18 @@ let g:ale_fixers = {
 
 nmap <F12> <Plug>(ale_fix)
 
-
 " ===== NERDTree =====
 map <C-n> :NERDTreeToggle<CR>
 
-
-" ===== Enable FZF =====
+" ===== FZF =====
 set rtp+=/usr/local/opt/fzf
 map <C-f> :FZF<CR>
-
 
 " ===== NERDTree show hidden files =====
 let NERDTreeShowHidden=1
 
+" ===== airblade vim gutter =====
+set updatetime=100
 
 " ===== Highlighting =====
 
@@ -109,7 +111,6 @@ augroup phpSyntaxOverride
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
-
 " -------------------------------------
 "  END Plugins Settings 
 " -------------------------------------
@@ -117,35 +118,38 @@ augroup END
 
 
 
-
 " -------------------------------------
 "  Appearance settings
 " -------------------------------------
+let g:forest_night_enable_italic=1
+let g:gruvbox_material_enable_italic=1
 
-syntax enable
 set background=dark
 set t_Co=256
-colorscheme dracula 
-
+syntax enable
+colorscheme gruvbox-material
 
 " set true colors and add vim specific fixes
 set termguicolors
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 
+" Fonts
+set guifont=PragmataPro:h16
 
-" -------------------------------------
-"  Interface settings
-" -------------------------------------
-
-set guifont=OperatorMono-Book:h16
 " For italic on operator mono
 hi Comment gui=italic cterm=italic
 hi htmlArg gui=italic cterm=italic
 
 
+" -------------------------------------
+"  Interface settings
+" -------------------------------------
+
 set mouse=a                             " Activates the mouse
 set ruler                               " Show current position
+set number                              " First set number
+set relativenumber                      " Show relative line number hybrid
 set backspace=indent,eol,start          " Configure workspace so it works as it should
 set whichwrap+=<,>,h,l                  
 set magic                               " For regular expressions turn magic on
@@ -155,6 +159,7 @@ set scrolloff=5                         " keep at least 5 lines above/below
 set noerrorbells                        " No annoying sound on errors
 set novisualbell
 set tm=500
+set re=0
 
 
 " -------------------------------------
@@ -227,3 +232,4 @@ augroup vimrc-make-cmake
   autocmd FileType make setlocal noexpandtab
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 augroup END
+
