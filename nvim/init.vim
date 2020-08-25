@@ -66,8 +66,8 @@ call plug#end()
 
 " ===== vim-test =====
 let test#strategy = 'neovim'
-map <F9> :TestNearest
-map <F10> :TestFile
+map <F9> :TestNearest<CR>
+map <F10> :TestFile<CR>
 
 " ===== w0rp/ALE =====
 let g:ale_fix_on_save = 1
@@ -135,7 +135,7 @@ set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 
 " Fonts
-set guifont=PragmataPro:h16
+set guifont=Iosevka:h16
 
 " For italic on operator mono
 hi Comment gui=italic cterm=italic
