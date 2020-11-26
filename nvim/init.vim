@@ -22,8 +22,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'valloric/youcompleteme'
 Plug 'w0rp/ale'
 Plug 'scrooloose/syntastic'
-Plug 'junegunn/fzf'
 Plug 'janko/vim-test'
+Plug 'junegunn/fzf'
+Plug 'dyng/ctrlsf.vim'
 " UI
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -43,7 +44,7 @@ Plug 'raimondi/delimitmate'
 " A lot of languages syntax & indent
 Plug 'sheerun/vim-polyglot'
 " Typescript
-" Plug 'quramytsuquyomi'
+Plug 'Quramy/tsuquyomi'
 Plug 'Quramy/vim-js-pretty-template'
 " PHP
 Plug 'stanangeloff/php.vim'
@@ -63,6 +64,9 @@ Plug 'dracula/vim', {'as': 'dracula'}
 
 call plug#end()
 
+
+" Plugin settings
+" ------------------------
 
 " ===== vim-test =====
 let test#strategy = 'neovim'
@@ -86,13 +90,18 @@ map <C-n> :NERDTreeToggle<CR>
 set rtp+=/usr/local/opt/fzf
 map <C-f> :FZF<CR>
 
+" ===== CtrlSF =====
+nnoremap <C-S-u> :exec ":CtrlSF ".input("CtrlSF pattern: ")<CR>
+
 " ===== NERDTree show hidden files =====
 let NERDTreeShowHidden=1
 
 " ===== airblade vim gutter =====
 set updatetime=100
 
-" ===== Highlighting =====
+
+" Syntax highlighting
+" ------------------------
 
 " Make Vue files work
 autocmd BufRead,BufNewFile *.vue setfiletype html
@@ -184,9 +193,8 @@ set undolevels=1000                     " store 1000 undos
 "  Text settings
 " -------------------------------------
 
+set omnifunc=syntaxcomplete#Complete    " Allows omnifunc
 set nowrap                              " don't wrap my text !
-
-" Use spaces, damn it!
 set expandtab                           " use spaces instead of tabs
 set nojoinspaces                        " use one space, not two, after punctuation
 set shiftround                          " shift to next tabstop
