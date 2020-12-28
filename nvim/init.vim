@@ -25,6 +25,7 @@ Plug 'scrooloose/syntastic'
 Plug 'janko/vim-test'
 Plug 'junegunn/fzf'
 Plug 'dyng/ctrlsf.vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 " UI
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -83,6 +84,9 @@ let g:ale_fixers = {
 
 nmap <F12> <Plug>(ale_fix)
 
+" ===== Quramy/tsuquyomi =====
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+
 " ===== NERDTree =====
 map <C-n> :NERDTreeToggle<CR>
 
@@ -91,7 +95,7 @@ set rtp+=/usr/local/opt/fzf
 map <C-f> :FZF<CR>
 
 " ===== CtrlSF =====
-nnoremap <C-R> :exec ":CtrlSF ".input("CtrlSF pattern: ")<CR>
+nnoremap <leader>r :exec ":CtrlSF ".input("CtrlSF pattern: ")<CR>
 
 " ===== NERDTree show hidden files =====
 let NERDTreeShowHidden=1
