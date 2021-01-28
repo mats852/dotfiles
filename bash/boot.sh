@@ -11,13 +11,11 @@ eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # ===== Configurations =====
 
+# Aliases
+alias ll="ls -alF"
+
 # Keyboard Speed
 xset r rate 225 75
-
-# AWS profile in prompt if applicable
-if [ -n "${AWS_VAULT+set}" ]; then 
-  PS1="%F{129}AWS-VAULT - %F{156}{%F{197}$AWS_VAULT%F{156}}:$PS1"; 
-fi
 
 
 # ===== Environment variables =====
