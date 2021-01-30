@@ -91,7 +91,7 @@ set rtp+=/usr/local/opt/fzf
 map <C-f> :FZF<CR>
 
 " ===== CtrlSF =====
-nnoremap <C-R> :exec ":CtrlSF ".input("CtrlSF pattern: ")<CR>
+nnoremap <leader>r :exec ":CtrlSF ".input("CtrlSF pattern: ")<CR>
 
 " ===== NERDTree show hidden files =====
 let NERDTreeShowHidden=1
