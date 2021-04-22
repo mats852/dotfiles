@@ -25,7 +25,6 @@ Plug 'scrooloose/syntastic'
 Plug 'janko/vim-test'
 Plug 'junegunn/fzf'
 Plug 'dyng/ctrlsf.vim'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 " UI
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -41,12 +40,13 @@ Plug 'raimondi/delimitmate'
 
 " Languages
 " ------------------------
-
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " A lot of languages syntax & indent
 Plug 'sheerun/vim-polyglot'
+" Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Typescript
 Plug 'Quramy/tsuquyomi'
-Plug 'Quramy/vim-js-pretty-template'
 " PHP
 Plug 'stanangeloff/php.vim'
 Plug 'stephpy/vim-php-cs-fixer'
@@ -69,6 +69,9 @@ call plug#end()
 " Plugin settings
 " ------------------------
 
+" ===== TreeShitter =====
+lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+
 " ===== vim-test =====
 let test#strategy = 'neovim'
 map <F9> :TestNearest<CR>
@@ -85,7 +88,7 @@ let g:ale_fixers = {
 nmap <F12> <Plug>(ale_fix)
 
 " ===== Quramy/tsuquyomi =====
-autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+" autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
 " ===== NERDTree =====
 map <C-n> :NERDTreeToggle<CR>
@@ -188,7 +191,7 @@ set noswapfile                          " no swapfiles
 set nowritebackup                       " don't save a backup while editing
 set lazyredraw                          " see if this fixes the slowness
 set ttyfast                             " indicates a fast terminal connection
-set undodir=~/.vim/undodir              " set undofile location
+set undodir=~/.local/share/nvim/undodir " set undofile location
 set undofile                            " maintain undo history between sessions
 set undolevels=1000                     " store 1000 undos
 

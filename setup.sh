@@ -1,9 +1,9 @@
 #!/bin/bash
 
 projects=(
-  alacritty
   bash
   vim
+  nvim
 )
 
 echo "Symlinking configurations..."

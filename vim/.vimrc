@@ -18,7 +18,7 @@ filetype plugin indent on
 
 call plug#begin('~/.local/share/vim/plugged')
 
-" Automation
+" " Automation
 Plug 'valloric/youcompleteme'
 Plug 'w0rp/ale'
 Plug 'scrooloose/syntastic'
@@ -43,6 +43,8 @@ Plug 'raimondi/delimitmate'
 
 " A lot of languages syntax & indent
 Plug 'sheerun/vim-polyglot'
+" Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Typescript
 Plug 'Quramy/tsuquyomi'
 Plug 'Quramy/vim-js-pretty-template'
@@ -61,6 +63,7 @@ Plug 'franbach/miramare'
 Plug 'sainnhe/forest-night'
 Plug 'sainnhe/gruvbox-material'
 Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'phanviet/vim-monokai-pro'
 
 call plug#end()
 
@@ -121,7 +124,7 @@ augroup phpSyntaxOverride
 augroup END
 
 " -------------------------------------
-"  END Plugins Settings 
+" END Plugins Settings 
 " -------------------------------------
 
 
@@ -136,7 +139,7 @@ let g:gruvbox_material_enable_italic=1
 set background=dark
 set t_Co=256
 syntax enable
-colorscheme gruvbox-material
+colorscheme monokai_pro
 
 " set true colors and add vim specific fixes
 set termguicolors
@@ -145,11 +148,6 @@ set t_8b=[48;2;%lu;%lu;%lum
 
 " Fonts
 set guifont=Iosevka:h16
-
-" For italic on operator mono
-hi Comment gui=italic cterm=italic
-hi htmlArg gui=italic cterm=italic
-
 
 " -------------------------------------
 "  Interface settings
