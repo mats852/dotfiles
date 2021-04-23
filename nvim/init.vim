@@ -19,8 +19,9 @@ filetype plugin indent on
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Automation
-Plug 'valloric/youcompleteme'
-Plug 'w0rp/ale'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+Plug 'dense-analysis/ale'
 Plug 'scrooloose/syntastic'
 Plug 'janko/vim-test'
 Plug 'junegunn/fzf'
@@ -76,6 +77,13 @@ lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 let test#strategy = 'neovim'
 map <F9> :TestNearest<CR>
 map <F10> :TestFile<CR>
+
+" ===== Shougo/deoplete =====
+let g:deoplete#enable_at_startup = 1
+
+call deoplete#custom#option('sources', {
+\ '_': ['ale'],
+\})
 
 " ===== w0rp/ALE =====
 let g:ale_fix_on_save = 1
