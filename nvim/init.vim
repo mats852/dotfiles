@@ -18,27 +18,6 @@ filetype plugin indent on
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Automation
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
-Plug 'dense-analysis/ale'
-Plug 'scrooloose/syntastic'
-Plug 'janko/vim-test'
-Plug 'junegunn/fzf'
-Plug 'dyng/ctrlsf.vim'
-" UI
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'bling/vim-airline'
-Plug 'edkolev/tmuxline.vim'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
-" Utils
-Plug 'scrooloose/nerdcommenter'
-Plug 'raimondi/delimitmate'
-
 " Languages
 " ------------------------
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -53,6 +32,33 @@ Plug 'stanangeloff/php.vim'
 Plug 'stephpy/vim-php-cs-fixer'
 Plug 'nelsyeung/twig.vim'
 
+" Automation
+" ------------------------
+Plug 'neovim/nvim-lspconfig'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
+Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+Plug 'dense-analysis/ale'
+Plug 'scrooloose/syntastic'
+Plug 'janko/vim-test'
+Plug 'junegunn/fzf'
+Plug 'dyng/ctrlsf.vim'
+
+" UI
+" ------------------------
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'bling/vim-airline'
+Plug 'edkolev/tmuxline.vim'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+
+" Utils
+" ------------------------
+Plug 'scrooloose/nerdcommenter'
+Plug 'raimondi/delimitmate'
 
 " Color Schemes
 " ------------------------
@@ -70,6 +76,12 @@ call plug#end()
 " Plugin settings
 " ------------------------
 
+" ===== LSPs =====
+lua << EOF
+require'lspconfig'.gopls.setup{}
+require'lspconfig'.intelephense.setup{}
+EOF
+
 " ===== TreeShitter =====
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
@@ -80,7 +92,10 @@ map <F10> :TestFile<CR>
 
 " ===== Shougo/deoplete =====
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_completion_start_length = 1
+
+call deoplete#custom#option('omni_patterns', {
+\ 'go': '[^. *\t]\.\w*',
+\})
 
 call deoplete#custom#option('sources', {
 \ '_': ['ale'],
