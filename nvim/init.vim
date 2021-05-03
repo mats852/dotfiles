@@ -93,8 +93,10 @@ map <F10> :TestFile<CR>
 " ===== Shougo/deoplete =====
 let g:deoplete#enable_at_startup = 1
 
+" \h\w*\ all words
 call deoplete#custom#option('omni_patterns', {
 \ 'go': '[^. *\t]\.\w*',
+\ 'php': '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 \})
 
 call deoplete#custom#option('sources', {
@@ -112,7 +114,7 @@ let g:ale_fixers = {
 nmap <F12> <Plug>(ale_fix)
 
 " ===== Quramy/tsuquyomi =====
-" autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
 " ===== NERDTree =====
 map <C-n> :NERDTreeToggle<CR>
