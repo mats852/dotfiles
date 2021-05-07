@@ -35,9 +35,10 @@ Plug 'nelsyeung/twig.vim'
 " Automation
 " ------------------------
 Plug 'neovim/nvim-lspconfig'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
-Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+Plug 'nvim-lua/completion-nvim'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete-lsp'
+" Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
 Plug 'dense-analysis/ale'
 Plug 'scrooloose/syntastic'
 Plug 'janko/vim-test'
@@ -68,6 +69,7 @@ Plug 'morhetz/gruvbox'
 Plug 'franbach/miramare'
 Plug 'sainnhe/forest-night'
 Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/sonokai'
 Plug 'dracula/vim', {'as': 'dracula'}
 
 call plug#end()
@@ -78,8 +80,8 @@ call plug#end()
 
 " ===== LSPs =====
 lua << EOF
-require'lspconfig'.gopls.setup{}
-require'lspconfig'.intelephense.setup{}
+require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
+require'lspconfig'.intelephense.setup{on_attach=require'completion'.on_attach}
 EOF
 
 " ===== TreeShitter =====
@@ -90,18 +92,11 @@ let test#strategy = 'neovim'
 map <F9> :TestNearest<CR>
 map <F10> :TestFile<CR>
 
-" ===== Shougo/deoplete =====
-let g:deoplete#enable_at_startup = 1
 
-" \h\w*\ all words
-call deoplete#custom#option('omni_patterns', {
-\ 'go': '[^. *\t]\.\w*',
-\ 'php': '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-\})
-
-call deoplete#custom#option('sources', {
-\ '_': ['ale'],
-\})
+" ===== completion-nvim =====
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " ===== w0rp/ALE =====
 let g:ale_fix_on_save = 1
@@ -153,6 +148,8 @@ augroup phpSyntaxOverride
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
+autocmd FileType php setlocal autoindent
+
 " -------------------------------------
 "  END Plugins Settings 
 " -------------------------------------
@@ -169,7 +166,7 @@ let g:gruvbox_material_enable_italic=1
 set background=dark
 set t_Co=256
 syntax enable
-colorscheme gruvbox-material
+colorscheme sonokai
 
 " set true colors and add vim specific fixes
 set termguicolors
@@ -226,7 +223,8 @@ set undolevels=1000                     " store 1000 undos
 "  Text settings
 " -------------------------------------
 
-set omnifunc=syntaxcomplete#Complete    " Allows omnifunc
+set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
+set shortmess+=c                        " Avoid showing message extra message when using completion
 set nowrap                              " don't wrap my text !
 set expandtab                           " use spaces instead of tabs
 set nojoinspaces                        " use one space, not two, after punctuation
