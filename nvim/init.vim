@@ -21,24 +21,13 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Languages
 " ------------------------
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" A lot of languages syntax & indent
-Plug 'sheerun/vim-polyglot'
-" Golang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Typescript
-Plug 'Quramy/tsuquyomi'
-" PHP
-Plug 'stanangeloff/php.vim'
-Plug 'stephpy/vim-php-cs-fixer'
 Plug 'nelsyeung/twig.vim'
+Plug 'stephpy/vim-php-cs-fixer'
 
 " Automation
 " ------------------------
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'Shougo/deoplete-lsp'
-" Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
 Plug 'dense-analysis/ale'
 Plug 'scrooloose/syntastic'
 Plug 'janko/vim-test'
@@ -64,9 +53,6 @@ Plug 'raimondi/delimitmate'
 " Color Schemes
 " ------------------------
 Plug 'joshdick/onedark.vim'
-Plug 'tomasr/molokai'
-Plug 'morhetz/gruvbox'
-Plug 'franbach/miramare'
 Plug 'sainnhe/forest-night'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/sonokai'
@@ -103,7 +89,8 @@ let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \ 'javascript': ['eslint'],
 \ 'typescript': ['eslint'],
-\ 'vue': ['eslint']
+\ 'vue': ['eslint'],
+\ 'php': ['php_cs_fixer'],
 \ }
 
 nmap <F12> <Plug>(ale_fix)
@@ -137,17 +124,6 @@ autocmd BufRead,BufNewFile *.vue setfiletype html
 " Make .twig files work
 autocmd BufNewFile,BufRead *.twig set filetype=html.twig
 
-" Php overriding highlighting
-function! PhpSyntaxOverride()
-  hi! def link phpDocTags  phpDefine
-  hi! def link phpDocParam phpType
-endfunction
-
-augroup phpSyntaxOverride
-  autocmd!
-  autocmd FileType php call PhpSyntaxOverride()
-augroup END
-
 autocmd FileType php setlocal autoindent
 
 " -------------------------------------
@@ -160,12 +136,14 @@ autocmd FileType php setlocal autoindent
 " -------------------------------------
 "  Appearance settings
 " -------------------------------------
-let g:forest_night_enable_italic=1
-let g:gruvbox_material_enable_italic=1
 
 set background=dark
 set t_Co=256
 syntax enable
+
+let g:forest_night_enable_italic=1
+let g:gruvbox_material_enable_italic=1
+
 colorscheme sonokai
 
 " set true colors and add vim specific fixes
@@ -224,7 +202,7 @@ set undolevels=1000                     " store 1000 undos
 " -------------------------------------
 
 set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
-set shortmess+=c                        " Avoid showing message extra message when using completion
+" set shortmess+=c                        " Avoid showing message extra message when using completion
 set nowrap                              " don't wrap my text !
 set expandtab                           " use spaces instead of tabs
 set nojoinspaces                        " use one space, not two, after punctuation
@@ -254,10 +232,10 @@ set encoding=utf-8                    " the encoding displayed
 " -------------------------------------
 
 " The PC is fast enough, do syntax highlight syncing from start unless 1000 lines
-augroup vimrc-sync-fromstart
-  autocmd!
-  autocmd BufEnter * :syntax sync maxlines=1500
-augroup END
+" augroup vimrc-sync-fromstart
+"   autocmd!
+"   autocmd BufEnter * :syntax sync maxlines=1500
+" augroup END
 
 " Remember cursor position
 augroup vimrc-remember-cursor-position
