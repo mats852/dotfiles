@@ -13,6 +13,74 @@ filetype plugin indent on
 
 
 " -------------------------------------
+"  Interface settings
+" -------------------------------------
+
+set mouse=a                             " Activates the mouse
+set ruler                               " Show current position
+set number                              " First set number
+set relativenumber                      " Show relative line number hybrid
+set backspace=indent,eol,start          " Configure workspace so it works as it should
+set whichwrap+=<,>,h,l                  
+set magic                               " For regular expressions turn magic on
+set showmatch                           " Show matching brackets when text indicator is over them
+set mat=2                               " How many tenths of a second to blink when matching brackets
+set scrolloff=5                         " keep at least 5 lines above/below
+set noerrorbells                        " No annoying sound on errors
+set novisualbell
+set tm=500
+set re=0
+
+
+" -------------------------------------
+"  File & backup settings
+" -------------------------------------
+
+set autoread                            " update file when changed outside of vim
+set autoindent                          " copy indentation from the previous line for new line
+set history=200                         " store last 200 commands as history
+set nobackup                            " don't save backups
+set noerrorbells                        " no error bells please
+set noswapfile                          " no swapfiles
+set nowritebackup                       " don't save a backup while editing
+set lazyredraw                          " see if this fixes the slowness
+set ttyfast                             " indicates a fast terminal connection
+set undodir=~/.local/share/nvim/undodir " set undofile location
+set undofile                            " maintain undo history between sessions
+set undolevels=1000                     " store 1000 undos
+
+
+" -------------------------------------
+"  Text settings
+" -------------------------------------
+
+set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
+" set shortmess+=c                        " Avoid showing message extra message when using completion
+set nowrap                              " don't wrap my text !
+set expandtab                           " use spaces instead of tabs
+set nojoinspaces                        " use one space, not two, after punctuation
+set shiftround                          " shift to next tabstop
+set shiftwidth=2                        " amount of space used for indentation
+set softtabstop=2                       " appearance of tabs
+set tabstop=2                           " use four spaces for tabs
+
+" Text options
+set formatoptions-=cro                  " prevent next line comments
+
+" searching
+set hlsearch                            " highlight search matches
+set ignorecase                          " set case insensitive searching
+set incsearch                           " find as you type search
+set smartcase                           " case sensitive searching when not all lowercase
+
+" character encoding
+if !&readonly && &modifiable
+  set fileencoding=utf-8              " the encoding written to file
+endif
+set encoding=utf-8                    " the encoding displayed
+
+
+" -------------------------------------
 "  Plugins Settings 
 " -------------------------------------
 
@@ -124,7 +192,7 @@ autocmd BufRead,BufNewFile *.vue setfiletype html
 " Make .twig files work
 autocmd BufNewFile,BufRead *.twig set filetype=html.twig
 
-autocmd FileType php setlocal autoindent
+autocmd FileType php setlocal autoindent expandtab shiftwidth=4 softtabstop=4
 
 " -------------------------------------
 "  END Plugins Settings 
@@ -157,74 +225,6 @@ set guifont=Iosevka:h16
 " For italic on operator mono
 hi Comment gui=italic cterm=italic
 hi htmlArg gui=italic cterm=italic
-
-
-" -------------------------------------
-"  Interface settings
-" -------------------------------------
-
-set mouse=a                             " Activates the mouse
-set ruler                               " Show current position
-set number                              " First set number
-set relativenumber                      " Show relative line number hybrid
-set backspace=indent,eol,start          " Configure workspace so it works as it should
-set whichwrap+=<,>,h,l                  
-set magic                               " For regular expressions turn magic on
-set showmatch                           " Show matching brackets when text indicator is over them
-set mat=2                               " How many tenths of a second to blink when matching brackets
-set scrolloff=5                         " keep at least 5 lines above/below
-set noerrorbells                        " No annoying sound on errors
-set novisualbell
-set tm=500
-set re=0
-
-
-" -------------------------------------
-"  File & backup settings
-" -------------------------------------
-
-set autoread                            " update file when changed outside of vim
-set autoindent                          " copy indentation from the previous line for new line
-set history=200                         " store last 200 commands as history
-set nobackup                            " don't save backups
-set noerrorbells                        " no error bells please
-set noswapfile                          " no swapfiles
-set nowritebackup                       " don't save a backup while editing
-set lazyredraw                          " see if this fixes the slowness
-set ttyfast                             " indicates a fast terminal connection
-set undodir=~/.local/share/nvim/undodir " set undofile location
-set undofile                            " maintain undo history between sessions
-set undolevels=1000                     " store 1000 undos
-
-
-" -------------------------------------
-"  Text settings
-" -------------------------------------
-
-set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
-" set shortmess+=c                        " Avoid showing message extra message when using completion
-set nowrap                              " don't wrap my text !
-set expandtab                           " use spaces instead of tabs
-set nojoinspaces                        " use one space, not two, after punctuation
-set shiftround                          " shift to next tabstop
-set shiftwidth=2                        " amount of space used for indentation
-set softtabstop=2                       " appearance of tabs
-set tabstop=2                           " use four spaces for tabs
-
-" Text options
-set formatoptions-=cro                  " prevent next line comments
-
-" searching
-set hlsearch                            " highlight search matches
-set ignorecase                          " set case insensitive searching
-set incsearch                           " find as you type search
-set smartcase                           " case sensitive searching when not all lowercase
-
-" character encoding
-if !&readonly && &modifiable
-  set fileencoding=utf-8              " the encoding written to file
-endif
-set encoding=utf-8                    " the encoding displayed
 
 
 " -------------------------------------
