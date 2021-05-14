@@ -55,7 +55,7 @@ set undolevels=1000                     " store 1000 undos
 " -------------------------------------
 
 set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
-" set shortmess+=c                        " Avoid showing message extra message when using completion
+set shortmess+=c                        " Avoid showing message extra message when using completion
 set nowrap                              " don't wrap my text !
 set expandtab                           " use spaces instead of tabs
 set nojoinspaces                        " use one space, not two, after punctuation
@@ -135,7 +135,7 @@ call plug#end()
 " ===== LSPs =====
 lua << EOF
 require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
-require'lspconfig'.intelephense.setup{on_attach=require'completion'.on_attach}
+require'lspconfig'.phpactor.setup{on_attach=require'completion'.on_attach}
 EOF
 
 " ===== TreeShitter =====
