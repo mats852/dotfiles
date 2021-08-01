@@ -54,7 +54,8 @@ set undolevels=1000                     " store 1000 undos
 "  Text settings
 " -------------------------------------
 
-set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
+" set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
+set completeopt=menuone,noselect
 set shortmess+=c                        " Avoid showing message extra message when using completion
 set nowrap                              " don't wrap my text !
 set expandtab                           " use spaces instead of tabs
@@ -117,14 +118,15 @@ Plug 'airblade/vim-gitgutter'
 " ------------------------
 Plug 'scrooloose/nerdcommenter'
 Plug 'raimondi/delimitmate'
+Plug 'aquach/vim-http-client'
 
 " Color Schemes
 " ------------------------
-Plug 'joshdick/onedark.vim'
-Plug 'sainnhe/forest-night'
-Plug 'sainnhe/gruvbox-material'
-Plug 'sainnhe/sonokai'
+Plug 'ayu-theme/ayu-vim'
 Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'gruvbox-community/gruvbox'
+Plug 'sainnhe/forest-night'
+Plug 'sainnhe/sonokai'
 
 call plug#end()
 
@@ -134,15 +136,60 @@ call plug#end()
 
 " ===== LSPs =====
 lua << EOF
-require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
-require'lspconfig'.phpactor.setup{on_attach=require'completion'.on_attach}
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+  require'completion'.on_attach(client, bufnr)
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { "gopls", "intelephense" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
 EOF
 
 " ===== TreeShitter =====
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
 " ===== vim-test =====
-let test#strategy = 'neovim'
+let test#strategy = ''
 map <F9> :TestNearest<CR>
 map <F10> :TestFile<CR>
 
@@ -209,15 +256,14 @@ set background=dark
 set t_Co=256
 syntax enable
 
-let g:forest_night_enable_italic=1
-let g:gruvbox_material_enable_italic=1
-
-colorscheme sonokai
-
 " set true colors and add vim specific fixes
 set termguicolors
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
+
+" color scheme
+let ayucolor="dark"
+colorscheme ayu
 
 " Fonts
 set guifont=Iosevka:h16
