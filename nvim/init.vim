@@ -124,9 +124,10 @@ Plug 'aquach/vim-http-client'
 " ------------------------
 Plug 'ayu-theme/ayu-vim'
 Plug 'dracula/vim', {'as': 'dracula'}
-Plug 'gruvbox-community/gruvbox'
-Plug 'sainnhe/forest-night'
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/everforest'
 Plug 'sainnhe/sonokai'
+Plug 'sonph/onehalf'
 
 call plug#end()
 
@@ -262,8 +263,7 @@ set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 
 " color scheme
-let ayucolor="dark"
-colorscheme ayu
+colorscheme sonokai
 
 " Fonts
 set guifont=Iosevka:h16
