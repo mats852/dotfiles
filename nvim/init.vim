@@ -21,7 +21,6 @@ set background=dark
 set t_Co=256
 syntax enable
 
-colorscheme sonokai
 set guifont=Iosevka:h16
 
 hi Comment gui=italic cterm=italic
@@ -100,15 +99,24 @@ set encoding=utf-8                      " the encoding displayed
 "  Remaps
 " -------------------------------------
 
-nnoremap Y y$                           " To behave like other commands, to EOL
-noremap J mzJ`z                         " Keep cursor position
-noremap n nzzzv                         " Keep selection in center of screen
+" To behave like other commands, to EOL
+nnoremap Y y$
+
+" Keep cursor position
+noremap J mzJ`z
+
+" Keep selection in center of screen
+noremap n nzzzv
 noremap N Nzzzv
-inoremap , ,<c-g>u                      " Creates change breakpoint at punctuation mark
+
+" Creates change breakpoint at punctuation mark
+inoremap , ,<c-g>u
 inoremap . .<c-g>u
 inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
-vnoremap J :m '>+1<CR>gv=gv             " Move lines
+
+" Move lines
+vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 inoremap <C-j> <esc>:m .+1<CR>==
 inoremap <C-k> <esc>:m .-2<CR>==
@@ -168,6 +176,13 @@ Plug 'sonph/onehalf'
 call plug#end()
 
 
+" -------------------------------------
+"  Colorscheme
+" -------------------------------------
+
+colorscheme sonokai
+
+
 " Plugin settings
 " ------------------------
 
@@ -211,7 +226,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "gopls", "intelephense" }
+local servers = { "gopls", "phpactor" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
