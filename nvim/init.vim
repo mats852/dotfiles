@@ -13,6 +13,22 @@ filetype plugin indent on
 
 
 " -------------------------------------
+"  Appearance settings
+" -------------------------------------
+
+set termguicolors
+set background=dark
+set t_Co=256
+syntax enable
+
+colorscheme sonokai
+set guifont=Iosevka:h16
+
+hi Comment gui=italic cterm=italic
+hi htmlArg gui=italic cterm=italic
+
+
+" -------------------------------------
 "  Interface settings
 " -------------------------------------
 
@@ -54,8 +70,7 @@ set undolevels=1000                     " store 1000 undos
 "  Text settings
 " -------------------------------------
 
-" set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
-set completeopt=menuone,noselect
+set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
 set shortmess+=c                        " Avoid showing message extra message when using completion
 set nowrap                              " don't wrap my text !
 set expandtab                           " use spaces instead of tabs
@@ -76,9 +91,29 @@ set smartcase                           " case sensitive searching when not all 
 
 " character encoding
 if !&readonly && &modifiable
-  set fileencoding=utf-8              " the encoding written to file
+  set fileencoding=utf-8                " the encoding written to file
 endif
-set encoding=utf-8                    " the encoding displayed
+set encoding=utf-8                      " the encoding displayed
+
+
+" -------------------------------------
+"  Remaps
+" -------------------------------------
+
+nnoremap Y y$                           " To behave like other commands, to EOL
+noremap J mzJ`z                         " Keep cursor position
+noremap n nzzzv                         " Keep selection in center of screen
+noremap N Nzzzv
+inoremap , ,<c-g>u                      " Creates change breakpoint at punctuation mark
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+vnoremap J :m '>+1<CR>gv=gv             " Move lines
+vnoremap K :m '<-2<CR>gv=gv
+inoremap <C-j> <esc>:m .+1<CR>==
+inoremap <C-k> <esc>:m .-2<CR>==
+nnoremap <leader>k :m .-2<CR>==
+nnoremap <leader>j :m .+1<CR>==
 
 
 " -------------------------------------
@@ -93,32 +128,33 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nelsyeung/twig.vim'
 Plug 'stephpy/vim-php-cs-fixer'
 
-" Automation
+" LSP, Syntax, Lint
 " ------------------------
+Plug 'dense-analysis/ale'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'dense-analysis/ale'
-Plug 'scrooloose/syntastic'
-Plug 'janko/vim-test'
-Plug 'junegunn/fzf'
+Plug 'raimondi/delimitmate'
+
+" File navigation
+" ------------------------
 Plug 'dyng/ctrlsf.vim'
+Plug 'junegunn/fzf'
+Plug 'scrooloose/nerdtree'
 
 " UI
 " ------------------------
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
+Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Utils
 " ------------------------
+Plug 'janko/vim-test'
 Plug 'scrooloose/nerdcommenter'
-Plug 'raimondi/delimitmate'
-Plug 'aquach/vim-http-client'
+Plug 'tpope/vim-fugitive'
 
 " Color Schemes
 " ------------------------
@@ -241,58 +277,4 @@ autocmd BufRead,BufNewFile *.vue setfiletype html
 autocmd BufNewFile,BufRead *.twig set filetype=html.twig
 
 autocmd FileType php setlocal autoindent expandtab shiftwidth=4 softtabstop=4
-
-" -------------------------------------
-"  END Plugins Settings 
-" -------------------------------------
-
-
-
-
-" -------------------------------------
-"  Appearance settings
-" -------------------------------------
-
-set background=dark
-set t_Co=256
-syntax enable
-
-" set true colors and add vim specific fixes
-set termguicolors
-set t_8f=[38;2;%lu;%lu;%lum
-set t_8b=[48;2;%lu;%lu;%lum
-
-" color scheme
-colorscheme sonokai
-
-" Fonts
-set guifont=Iosevka:h16
-
-" For italic on operator mono
-hi Comment gui=italic cterm=italic
-hi htmlArg gui=italic cterm=italic
-
-
-" -------------------------------------
-"  Autocmd Rules
-" -------------------------------------
-
-" The PC is fast enough, do syntax highlight syncing from start unless 1000 lines
-" augroup vimrc-sync-fromstart
-"   autocmd!
-"   autocmd BufEnter * :syntax sync maxlines=1500
-" augroup END
-
-" Remember cursor position
-augroup vimrc-remember-cursor-position
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-augroup END
-
-" make/cmake
-augroup vimrc-make-cmake
-  autocmd!
-  autocmd FileType make setlocal noexpandtab
-  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
-augroup END
 
