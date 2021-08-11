@@ -69,7 +69,7 @@ set undolevels=1000                     " store 1000 undos
 "  Text settings
 " -------------------------------------
 
-set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
+set completeopt=menuone,noselect        " Set completeopt to have a better completion experience
 set shortmess+=c                        " Avoid showing message extra message when using completion
 set nowrap                              " don't wrap my text !
 set expandtab                           " use spaces instead of tabs
@@ -140,7 +140,7 @@ Plug 'stephpy/vim-php-cs-fixer'
 " ------------------------
 Plug 'dense-analysis/ale'
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
 Plug 'raimondi/delimitmate'
 
 " File navigation
@@ -220,8 +220,6 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-
-  require'completion'.on_attach(client, bufnr)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -246,10 +244,39 @@ map <F9> :TestNearest<CR>
 map <F10> :TestFile<CR>
 
 
-" ===== completion-nvim =====
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" ===== nvim-compe =====
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.autocomplete = v:true
+let g:compe.debug = v:false
+let g:compe.min_length = 1
+let g:compe.preselect = 'enable'
+let g:compe.throttle_time = 80
+let g:compe.source_timeout = 200
+let g:compe.resolve_timeout = 800
+let g:compe.incomplete_delay = 400
+let g:compe.max_abbr_width = 100
+let g:compe.max_kind_width = 100
+let g:compe.max_menu_width = 100
+let g:compe.documentation = v:true
+
+let g:compe.source = {}
+let g:compe.source.path = v:true
+let g:compe.source.buffer = v:true
+let g:compe.source.calc = v:true
+let g:compe.source.nvim_lsp = v:true
+let g:compe.source.nvim_lua = v:true
+let g:compe.source.treesitter = v:true
+let g:compe.source.tmux = v:true
+let g:compe.source.emoji = v:true
+
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+inoremap <silent><expr> <TAB>     pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>            pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " ===== w0rp/ALE =====
 let g:ale_fix_on_save = 1
