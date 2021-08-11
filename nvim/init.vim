@@ -258,6 +258,7 @@ let g:ale_fixers = {
 \ 'typescript': ['eslint'],
 \ 'vue': ['eslint'],
 \ 'php': ['php_cs_fixer'],
+\ 'go': ['gofmt'],
 \ }
 
 nmap <F12> <Plug>(ale_fix)
