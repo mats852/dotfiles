@@ -6,4 +6,4 @@ FILE="boot.sh"
 
 mkdir -p $DEST
 ln -sf "$DIR/$FILE" "$DEST/$FILE"
-echo "[ -f ~/.config/boot.sh ] && . \"$HOME/.config/boot.sh\"" >> /$HOME/.bashrc
+echo "[ -f ~/.config/boot.sh ] && . \"$HOME/.config/boot.sh\"" >> /$HOME/.bash_profile

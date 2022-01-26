@@ -1,12 +1,4 @@
 #!/bin/bash
-export BASH_SILENCE_DEPRECATION_WARNING=1
-
-# ----- Apps -----
-eval "$(starship init bash)"
-if [ -d "/home/linuxbrew" ]; then
-  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-fi
-
 
 # ----- Configs -----
 alias ll="ls -alF"
