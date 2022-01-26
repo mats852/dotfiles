@@ -101,6 +101,9 @@ set encoding=utf-8                      " the encoding displayed
 
 " Don't suspend
 nnoremap <c-z> <nop>
+"
+" Screw your ex
+nnoremap Q <nop>
 
 " To behave like other commands, to EOL
 nnoremap Y y$
@@ -226,7 +229,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "html", "gopls", "intelephense", "erlangls", "kotlin_language_server" }
+local servers = { "html", "tsserver", "gopls", "intelephense", "erlangls", "kotlin_language_server" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
