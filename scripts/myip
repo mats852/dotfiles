@@ -6,4 +6,6 @@ echo $IP
 
 if [ -x "$(command -v xclip)" ]; then
   echo -n $IP |xclip -selection c
+elif [ -x "$(command -v pbcopy)" ]; then
+  echo -n $IP |pbcopy
 fi

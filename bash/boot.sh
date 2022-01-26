@@ -3,20 +3,23 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # ----- Apps -----
 eval "$(starship init bash)"
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+if [ -d "/home/linuxbrew" ]; then
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
 
 
 # ----- Configs -----
 alias ll="ls -alF"
 
+
 # GnuPG
 export GPG_TTY=$(tty)
 
-# Keyboard Speed
-xset r rate 225 75
 
-# NPM TOKEN
-export NPM_TOKEN=""
+# Keyboard Speed
+if [ -x "$(command -v xset)" ]; then
+  xset r rate 225 75
+fi
 
 
 # ----- PATH stuff -----
