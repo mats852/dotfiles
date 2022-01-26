@@ -18,18 +18,10 @@ xset r rate 225 75
 # NPM TOKEN
 export NPM_TOKEN=""
 
+
 # ----- PATH stuff -----
-# NVM 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="$PATH:$HOME/.local/scripts"
 
-# Rust
-export PATH=$PATH:$HOME/.cargo/env
-
-# Deno
-export DENO_INSTALL="/home/mats/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
 
 # ----- Git configs -----
 

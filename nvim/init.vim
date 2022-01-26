@@ -36,7 +36,7 @@ set ruler                               " Show current position
 set number                              " First set number
 set relativenumber                      " Show relative line number hybrid
 set backspace=indent,eol,start          " Configure workspace so it works as it should
-set whichwrap+=<,>,h,l                  
+set whichwrap+=<,>,h,l
 set magic                               " For regular expressions turn magic on
 set showmatch                           " Show matching brackets when text indicator is over them
 set mat=2                               " How many tenths of a second to blink when matching brackets
@@ -99,6 +99,9 @@ set encoding=utf-8                      " the encoding displayed
 "  Remaps
 " -------------------------------------
 
+" Don't suspend
+nnoremap <c-z> <nop>
+
 " To behave like other commands, to EOL
 nnoremap Y y$
 
@@ -125,7 +128,7 @@ nnoremap <leader>j :m .+1<CR>==
 
 
 " -------------------------------------
-"  Plugins Settings 
+"  Plugins Settings
 " -------------------------------------
 
 call plug#begin('~/.local/share/nvim/plugged')
@@ -170,7 +173,7 @@ Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/everforest'
 Plug 'sainnhe/sonokai'
-Plug 'sonph/onehalf'
+Plug 'liuchengxu/space-vim-dark'
 
 call plug#end()
 
@@ -223,7 +226,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "html", "gopls", "intelephense", "erlangls" }
+local servers = { "html", "gopls", "intelephense", "erlangls", "kotlin_language_server" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -284,11 +287,13 @@ inoremap <expr><S-TAB>            pumvisible() ? "\<C-p>" : "\<C-h>"
 " ===== w0rp/ALE =====
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
+\ '*': ['remove_trailing_lines', 'trim_whitespace'],
 \ 'javascript': ['eslint'],
 \ 'typescript': ['eslint'],
 \ 'vue': ['eslint'],
 \ 'php': ['php_cs_fixer'],
 \ 'go': ['gofmt'],
+\ 'kotlin': ['ktlint'],
 \ }
 
 nmap <F12> <Plug>(ale_fix)
@@ -323,4 +328,3 @@ autocmd BufRead,BufNewFile *.vue setfiletype html
 autocmd BufNewFile,BufRead *.twig set filetype=html.twig
 
 autocmd FileType php setlocal autoindent expandtab shiftwidth=4 softtabstop=4
-

@@ -5,4 +5,5 @@ DEST="$HOME/.config"
 FILE="boot.sh"
 
 mkdir -p $DEST
-[ ! -f "$DEST/$FILE" ] && cp "$DIR/$FILE" "$DEST/$FILE"
+ln -sf "$DIR/$FILE" "$DEST/$FILE"
+echo "[ -f ~/.config/boot.sh ] && . \"/$HOME/.config/boot.sh\"" >> /$HOME/.bashrc

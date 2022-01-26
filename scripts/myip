@@ -1,0 +1,9 @@
+#!/bin/bash
+
+IP=$(dig @resolver4.opendns.com myip.opendns.com +short)
+
+echo $IP
+
+if [ -x "$(command -v xclip)" ]; then
+  echo -n $IP |xclip -selection c
+fi
