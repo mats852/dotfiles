@@ -158,6 +158,7 @@ Plug 'scrooloose/nerdtree'
 " UI
 " ------------------------
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-surround'
