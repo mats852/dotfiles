@@ -1,12 +1,8 @@
 #!/bin/bash
 
 # ----- Configs -----
-alias ll="ls -alF"
-
-
 # GnuPG
 export GPG_TTY=$(tty)
-
 
 # Keyboard Speed
 if [ -x "$(command -v xset)" ]; then
