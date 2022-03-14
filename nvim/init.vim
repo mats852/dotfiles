@@ -154,6 +154,8 @@ Plug 'raimondi/delimitmate'
 Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf'
 Plug 'scrooloose/nerdtree'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'ThePrimeagen/harpoon'
 
 " UI
 " ------------------------
@@ -164,6 +166,8 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'preservim/vimux'
+Plug 'sindrets/diffview.nvim'
 
 " Utils
 " ------------------------
@@ -249,10 +253,12 @@ EOF
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
 " ===== vim-test =====
-let test#strategy = ''
 map <F9> :TestNearest<CR>
 map <F10> :TestFile<CR>
-
+let test#strategy = 'vimux'
+let test#go#gotest#options = {
+  \ 'nearest': '-v',
+\}
 
 " ===== nvim-compe =====
 let g:compe = {}
@@ -296,7 +302,7 @@ let g:ale_fixers = {
 \ 'typescript': ['eslint'],
 \ 'vue': ['eslint'],
 \ 'php': ['php_cs_fixer'],
-\ 'go': ['gofmt'],
+\ 'go': ['gofmt', 'goimports'],
 \ 'kotlin': ['ktlint'],
 \ }
 
