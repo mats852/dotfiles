@@ -9,6 +9,8 @@ if [ -x "$(command -v xset)" ]; then
   xset r rate 225 75
 fi
 
+alias ll="ls -alF"
+
 
 # ----- PATH stuff -----
 export PATH="$PATH:$HOME/.local/scripts"
