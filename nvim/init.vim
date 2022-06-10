@@ -171,6 +171,8 @@ Plug 'sindrets/diffview.nvim'
 
 " Utils
 " ------------------------
+Plug 'mfussenegger/nvim-dap'
+Plug 'leoluz/nvim-dap-go'
 Plug 'janko/vim-test'
 Plug 'scrooloose/nerdcommenter'
 
@@ -199,6 +201,9 @@ lua require("config")
 
 " ===== TreeShitter =====
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+
+" ===== nvim-dap =====
+lua require('dap-go').setup()
 
 " ===== vim-test =====
 map <F9> :TestNearest<CR>
