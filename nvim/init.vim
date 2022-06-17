@@ -205,6 +205,19 @@ lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 " ===== nvim-dap =====
 lua require('dap-go').setup()
 
+nmap <silent> <leader>td :lua require('dap-go').debug_test()<CR>
+nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
+nnoremap <silent> <F6> <Cmd>lua require'dap'.step_over()<CR>
+nnoremap <silent> <F7> <Cmd>lua require'dap'.step_into()<CR>
+nnoremap <silent> <F8> <Cmd>lua require'dap'.step_out()<CR>
+nnoremap <silent> <Leader>b <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <Leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <Leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
+nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
+
+au FileType dap-repl lua require('dap.ext.autocompl').attach()
+
 " ===== vim-test =====
 map <F9> :TestNearest<CR>
 map <F10> :TestFile<CR>

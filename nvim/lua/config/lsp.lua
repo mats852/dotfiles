@@ -5,7 +5,7 @@ local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   Nnoremap('gD', ':lua vim.lsp.buf.declaration()<CR>')
-  Nnoremap('gd', ':vsplit <bar> lua vim.lsp.buf.definition()<CR>')
+  Nnoremap('gd', ':lua vim.lsp.buf.definition()<CR>')
   Nnoremap('K', ':lua vim.lsp.buf.hover()<CR>')
   Nnoremap('gi', ':lua vim.lsp.buf.implementation()<CR>')
   Nnoremap('<C-k>', ':lua vim.lsp.buf.signature_help()<CR>')
