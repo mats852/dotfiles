@@ -11,3 +11,4 @@ Inoremap = CreateNoremap("i", { noremap = true })
 
 -- Initialize configuration files
 require("config.lsp")
+require("config.debugger")
