@@ -1,8 +1,7 @@
 #!/bin/bash
 
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P)
-DEST="$HOME/.config/nvim"
+DEST="$HOME/.config"
 
 mkdir -p $DEST
-ln -sf "$DIR/init.vim" "$DEST/init.vim"
-ln -sf "$DIR/lua" "$DEST/lua"
+ln -sf "$DIR" "$DEST"
