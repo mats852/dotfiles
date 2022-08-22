@@ -33,16 +33,15 @@ return require('packer').startup(function(use)
   use 'edkolev/tmuxline.vim'
   use 'tpope/vim-surround'
   use 'vim-airline/vim-airline-themes'
-  use 'Xuyuanp/nerdtree-git-plugin'
   use 'preservim/vimux'
   use 'sindrets/diffview.nvim'
 
   -- Utils
   use 'mfussenegger/nvim-dap'
   use 'leoluz/nvim-dap-go'
-  use 'rcarriga/nvim-dap-ui'
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use 'theHamsta/nvim-dap-virtual-text'
   use 'janko/vim-test'
-  use 'scrooloose/nerdcommenter'
 
   -- Color Schemes
   use 'ayu-theme/ayu-vim'

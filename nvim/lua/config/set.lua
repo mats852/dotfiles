@@ -5,7 +5,7 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
-vim.opt.undolevels = 1000 
+vim.opt.undolevels = 1000
 
 -- Edition
 vim.opt.mouse = "a"
