@@ -5,14 +5,6 @@ local luasnip = require("luasnip")
 local inoremap = remap.inoremap
 local nnoremap = remap.nnoremap
 
-nnoremap("<Tab>", function()
-  luasnip.jump(1)
-end)
-
-nnoremap("<S-Tab>", function()
-  luasnip.jump(-1)
-end)
-
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -20,10 +12,26 @@ cmp.setup({
 		end,
 	},
 	window = {
-		-- completion = cmp.config.window.bordered(),
-		-- documentation = cmp.config.window.bordered(),
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
 	},
 	mapping = cmp.mapping.preset.insert({
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+        return
+      end
+      fallback()
+    end
+    , { 'i', 'c' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+        return
+      end
+      fallback()
+    end
+    , { 'i', 'c' }),
 		['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
@@ -32,7 +40,7 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' }, -- For luasnip users.
+		{ name = 'luasnip' },
 	}, {
 		{ name = 'buffer' },
 	})
@@ -40,29 +48,29 @@ cmp.setup({
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
-	sources = cmp.config.sources({
-		{ name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-	}, {
-		{ name = 'buffer' },
-	})
+  sources = cmp.config.sources({
+    { name = 'cmp_git' },
+  }, {
+    { name = 'buffer' },
+  })
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
-		{ name = 'buffer' }
-	}
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = 'path' }
-	}, {
-		{ name = 'cmdline' }
-	})
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
 })
 
 
@@ -72,67 +80,68 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
 
   nnoremap("gD", function()
-      vim.lsp.buf.declaration()
+    vim.lsp.buf.declaration()
   end)
   nnoremap("gd", function()
-      vim.lsp.buf.definition()
+    vim.lsp.buf.definition()
   end)
   nnoremap("K", function()
-      vim.lsp.buf.hover()
+    vim.lsp.buf.hover()
   end)
   nnoremap("gi", function()
-      vim.lsp.buf.implementation()
+    vim.lsp.buf.implementation()
   end)
   nnoremap("<C-k>", function()
-      vim.lsp.buf.signature_help()
+    vim.lsp.buf.signature_help()
   end)
   nnoremap("<space>wa", function()
-      vim.lsp.buf.add_workspace_folder()
+    vim.lsp.buf.add_workspace_folder()
   end)
   nnoremap("<space>wr", function()
-      vim.lsp.buf.remove_workspace_folder()
+    vim.lsp.buf.remove_workspace_folder()
   end)
   nnoremap("<space>wl", function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end)
   nnoremap("<space>D", function()
-      vim.lsp.buf.type_definition()
+    vim.lsp.buf.type_definition()
   end)
   nnoremap("<space>rn", function()
-      vim.lsp.buf.rename()
+    vim.lsp.buf.rename()
   end)
   nnoremap("<space>ca", function()
-      vim.lsp.buf.code_action()
+    vim.lsp.buf.code_action()
   end)
   nnoremap("gr", function()
-      vim.lsp.buf.references()
+    vim.lsp.buf.references()
   end)
   nnoremap("<space>e", function()
-      vim.lsp.diagnostic.show_line_diagnostics()
+    vim.lsp.diagnostic.show_line_diagnostics()
   end)
   nnoremap("[d", function()
-      vim.lsp.diagnostic.goto_prev()
+    vim.lsp.diagnostic.goto_prev()
   end)
   nnoremap("]d", function()
-      vim.lsp.diagnostic.goto_next()
+    vim.lsp.diagnostic.goto_next()
   end)
   nnoremap("<space>q", function()
-      vim.lsp.diagnostic.set_loclist()
+    vim.lsp.diagnostic.set_loclist()
   end)
   nnoremap("<space>f", function()
-      vim.lsp.buf.formatting()
+    vim.lsp.buf.formatting()
   end)
 end
 
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local function config(_config)
   _config = _config or {}
 
   _setup = {
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
     flags = {
       debounce_text_changes = 150,
     }
@@ -159,5 +168,3 @@ local servers = {
 for _, server in ipairs(servers) do
   nvim_lsp[server].setup(config())
 end
-
--- Custom configurations

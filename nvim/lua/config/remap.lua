@@ -22,10 +22,10 @@ nnoremap ("n", "nzzzv")
 nnoremap("N", "Nzzzv")
 
 -- Creates change breakpoint at punctuation mark
-inoremap(", ,", "<c-g>u")
-inoremap(". .", "<c-g>u")
-inoremap("! !", "<c-g>u")
-inoremap("? ?", "<c-g>u")
+-- inoremap(", ,", "<c-g>u")
+-- inoremap(". .", "<c-g>u")
+-- inoremap("! !", "<c-g>u")
+-- inoremap("? ?", "<c-g>u")
 
 -- Move lines
 vnoremap("J", ":m '>+1<CR>gv=gv")
