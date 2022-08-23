@@ -15,61 +15,61 @@ daptext.setup()
 dapui.setup()
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
-    dapui.open()
+  dapui.open()
 end
 
 dap.listeners.before.event_terminated["dapui_config"] = function()
-    dapui.close()
+  dapui.close()
 end
 
 dap.listeners.before.event_exited["dapui_config"] = function()
-    dapui.close()
+  dapui.close()
 end
 
 nnoremap("<Home>", function()
-    dapui.toggle(1)
+  dapui.toggle(1)
 end)
 
 nnoremap("<End>", function()
-    dapui.toggle(2)
+  dapui.toggle(2)
 end)
 
 nnoremap("<leader>5", function()
-    dap.continue()
+  dap.continue()
 end)
 
 nnoremap("<leader>6", function()
-    dap.close()
+  dap.close()
 end)
 
 nnoremap("<Up>", function()
-    dap.continue()
+  dap.continue()
 end)
 
 nnoremap("<Down>", function()
-    dap.step_over()
+  dap.step_over()
 end)
 
 nnoremap("<Right>", function()
-    dap.step_into()
+  dap.step_into()
 end)
 
 nnoremap("<Left>", function()
-    dap.step_out()
+  dap.step_out()
 end)
 
 nnoremap("<Leader>b", function()
-    dap.toggle_breakpoint()
+  dap.toggle_breakpoint()
 end)
 
 nnoremap("<Leader>B", function()
-    dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
+  dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
 end)
 
 nnoremap("<leader>dc", function()
-    dap.run_to_cursor()
+  dap.run_to_cursor()
 end)
 
 nnoremap("<leader>dl", function()
-    dap.run_last()
+  dap.run_last()
 end)
