@@ -2,7 +2,6 @@ local remap = require("config.keymap")
 local nnoremap = remap.nnoremap
 
 vim.cmd([[
-  let g:test#go#runner = 'delve'
   let test#strategy = 'vimux'
   let test#go#gotest#options = {
     \ 'nearest': '-v',

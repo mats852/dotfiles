@@ -30,12 +30,13 @@ return require('packer').startup(function(use)
   -- UI
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
-  use 'bling/vim-airline'
-  use 'edkolev/tmuxline.vim'
   use 'tpope/vim-surround'
-  use 'vim-airline/vim-airline-themes'
   use 'preservim/vimux'
   use 'sindrets/diffview.nvim'
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
 
   -- Utils
   use 'mfussenegger/nvim-dap'
@@ -45,10 +46,10 @@ return require('packer').startup(function(use)
   use 'janko/vim-test'
 
   -- Color Schemes
+  use { "catppuccin/nvim", as = "catppuccin" }
   use 'ayu-theme/ayu-vim'
   use 'dracula/vim'
   use 'morhetz/gruvbox'
-  use 'sainnhe/everforest'
   use 'sainnhe/sonokai'
   use 'liuchengxu/space-vim-dark'
 end)
