@@ -40,7 +40,6 @@ return require('packer').startup(function(use)
 
   -- Utils
   use 'mfussenegger/nvim-dap'
-  use 'leoluz/nvim-dap-go'
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
   use 'theHamsta/nvim-dap-virtual-text'
   use 'janko/vim-test'
