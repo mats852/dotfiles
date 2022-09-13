@@ -42,7 +42,8 @@ return require('packer').startup(function(use)
   use 'mfussenegger/nvim-dap'
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
   use 'theHamsta/nvim-dap-virtual-text'
-  use 'janko/vim-test'
+  use 'leoluz/nvim-dap-go'
+  use 'vim-test/vim-test'
 
   -- Color Schemes
   use { "catppuccin/nvim", as = "catppuccin" }
