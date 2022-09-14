@@ -1,6 +1,7 @@
 local inoremap = require("config.keymap").inoremap
 local nnoremap = require("config.keymap").nnoremap
 local vnoremap = require("config.keymap").vnoremap
+local xnoremap = require("config.keymap").xnoremap
 
 -- Netrm explorer
 nnoremap("<leader>pv", ":Ex<CR>")
@@ -20,6 +21,9 @@ nnoremap("J", "mzJ`z")
 -- Keep selection in center of screen
 nnoremap ("n", "nzzzv")
 nnoremap("N", "Nzzzv")
+
+-- Paste without replacing copy register
+xnoremap("<leader>p", "\"_dP")
 
 -- Creates change breakpoint at punctuation mark
 -- inoremap(", ,", "<c-g>u")
