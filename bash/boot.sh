@@ -45,12 +45,14 @@ alias gcf='git commit --fixup'
 __git_complete gcf _git_commit
 alias gco='git checkout'
 __git_complete gco _git_checkout
-alias gcob='git checkout -b'
+alias gcob='git checkout -b $1 && git push --set-upstream --no-verify origin $1'
 __git_complete gco _git_checkout
 alias gd='git diff'
 __git_complete gd _git_diff
 alias gda='git diff HEAD'
 __git_complete gda _git_diff
+alias gf='git fetch --all --progress --prune'
+__git_complete gda _git_fetch
 alias gi='git init'
 alias glg='git log --graph --oneline --decorate --all'
 __git_complete gdg _git_log
