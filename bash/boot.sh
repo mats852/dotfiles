@@ -45,8 +45,6 @@ alias gcf='git commit --fixup'
 __git_complete gcf _git_commit
 alias gco='git checkout'
 __git_complete gco _git_checkout
-alias gcob='git checkout -b $1 && git push --set-upstream --no-verify origin $1'
-__git_complete gco _git_checkout
 alias gd='git diff'
 __git_complete gd _git_diff
 alias gda='git diff HEAD'
@@ -91,3 +89,7 @@ __git_complete gsts _git_stash
 
 # Git search by commit message
 function glf() { git log --all --grep="$1"; }
+
+# Git create branch and set upstream
+function gcob() { git checkout -b $1 && git push --set-upstream --no-verify origin $1; }
+__git_complete gcob _git_checkout
