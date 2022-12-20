@@ -141,7 +141,7 @@ local function config(_config)
 
   _setup = {
     on_attach = on_attach,
-    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
+    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
     flags = {
       debounce_text_changes = 150,
     }

@@ -10,6 +10,8 @@ return require('packer').startup(function(use)
   use 'stephpy/vim-php-cs-fixer'
 
   -- LSP, Syntax, Lint
+  use "williamboman/mason.nvim"
+  use "williamboman/mason-lspconfig.nvim"
   use 'dense-analysis/ale'
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
@@ -28,6 +30,7 @@ return require('packer').startup(function(use)
   use 'ThePrimeagen/harpoon'
 
   -- UI
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-surround'
