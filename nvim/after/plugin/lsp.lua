@@ -155,14 +155,15 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = {
-  "clangd",
-  "html",
-  "tsserver",
-  "gopls",
-  "intelephense",
-  "erlangls",
-  "kotlin_language_server",
-  "java_language_server",
+  'clangd',
+  'erlangls',
+  'html',
+  'gopls',
+  'intelephense',
+  'java_language_server',
+  'kotlin_language_server',
+  'sumneko_lua',
+  'tsserver',
 }
 
 for _, server in ipairs(servers) do

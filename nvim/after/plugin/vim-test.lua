@@ -8,5 +8,5 @@ vim.cmd([[
   \}
 ]])
 
-nnoremap("<F9>", ":TestNearest<CR>")
-nnoremap("<F10>", ":TestFile<CR>")
+-- nnoremap("<F9>", ":TestNearest<CR>")
+-- nnoremap("<F10>", ":TestFile<CR>")

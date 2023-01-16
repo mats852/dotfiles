@@ -4,14 +4,33 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- Languages
+  -- Color Schemes
+  use { 'catppuccin/nvim', as = 'catppuccin' }
+
+  -- Programming
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
   use 'nelsyeung/twig.vim'
   use 'stephpy/vim-php-cs-fixer'
+  use 'mfussenegger/nvim-dap'
+  use {'rcarriga/nvim-dap-ui', requires = 'mfussenegger/nvim-dap'}
+  use 'theHamsta/nvim-dap-virtual-text'
+  use 'leoluz/nvim-dap-go'
+  use {
+    'nvim-neotest/neotest',
+    requires = {
+      'nvim-neotest/neotest-go',
+      'nvim-neotest/neotest-plenary',
+      'nvim-neotest/neotest-vim-test',
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'antoinemadec/FixCursorHold.nvim'
+    }
+  }
+  use 'notomo/lreload.nvim'
 
   -- LSP, Syntax, Lint
-  use "williamboman/mason.nvim"
-  use "williamboman/mason-lspconfig.nvim"
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
   use 'dense-analysis/ale'
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
@@ -23,14 +42,14 @@ return require('packer').startup(function(use)
   use 'raimondi/delimitmate'
   use 'L3MON4D3/LuaSnip'
 
-  -- File navigation
-  use 'dyng/ctrlsf.vim'
-  use 'junegunn/fzf'
+  -- Utils
   use 'nvim-lua/plenary.nvim'
-  use 'ThePrimeagen/harpoon'
 
   -- UI
-  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+  use 'dyng/ctrlsf.vim'
+  use 'junegunn/fzf'
+  use {'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim'}
+  use {'ThePrimeagen/harpoon', requires = 'nvim-lua/plenary.nvim'}
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-surround'
@@ -40,19 +59,4 @@ return require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-
-  -- Utils
-  use 'mfussenegger/nvim-dap'
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-  use 'theHamsta/nvim-dap-virtual-text'
-  use 'leoluz/nvim-dap-go'
-  use 'vim-test/vim-test'
-
-  -- Color Schemes
-  use { "catppuccin/nvim", as = "catppuccin" }
-  use 'ayu-theme/ayu-vim'
-  use 'dracula/vim'
-  use 'morhetz/gruvbox'
-  use 'sainnhe/sonokai'
-  use 'liuchengxu/space-vim-dark'
 end)
