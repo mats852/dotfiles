@@ -1,5 +1,7 @@
 vim.cmd [[packadd packer.nvim]]
 
+vim.opt.runtimepath:append("~/code/neotest-go")
+
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
@@ -26,7 +28,6 @@ return require('packer').startup(function(use)
       'antoinemadec/FixCursorHold.nvim'
     }
   }
-  use 'notomo/lreload.nvim'
 
   -- LSP, Syntax, Lint
   use 'williamboman/mason.nvim'
@@ -46,17 +47,25 @@ return require('packer').startup(function(use)
   use 'nvim-lua/plenary.nvim'
 
   -- UI
-  use 'dyng/ctrlsf.vim'
-  use 'junegunn/fzf'
-  use {'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim'}
-  use {'ThePrimeagen/harpoon', requires = 'nvim-lua/plenary.nvim'}
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    requires = 'nvim-lua/plenary.nvim'
+  }
+  use {
+    'TimUntersberger/neogit',
+    requires = 'nvim-lua/plenary.nvim',
+  }
+  use {
+    'ThePrimeagen/harpoon',
+    requires = 'nvim-lua/plenary.nvim',
+  }
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-surround'
   use 'preservim/vimux'
   use 'sindrets/diffview.nvim'
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
 end)

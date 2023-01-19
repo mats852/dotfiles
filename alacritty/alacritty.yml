@@ -3,7 +3,7 @@ env:
 
 font:
   normal:
-    family: Iosevka
+    family: Iosevka Nerd Font
     style: Regular
   size: 15
 
