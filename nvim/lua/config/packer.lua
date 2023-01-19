@@ -1,7 +1,5 @@
 vim.cmd [[packadd packer.nvim]]
 
-vim.opt.runtimepath:append("~/code/neotest-go")
-
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
