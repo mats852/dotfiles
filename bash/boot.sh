@@ -93,3 +93,7 @@ function glf() { git log --all --grep="$1"; }
 # Git create branch and set upstream
 function gcob() { git checkout -b $1 && git push --set-upstream --no-verify origin $1; }
 __git_complete gcob _git_checkout
+
+# Get branch original commit hash
+# Useful for interactive rebase "squash": git rebase -i $(gboh)
+function gboh { git reflog show --no-abbrev $(git rev-parse --abbrev-ref HEAD) --format='%H' |tail -n 1; }
