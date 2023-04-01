@@ -3,7 +3,7 @@ local nnoremap = remap.nnoremap
 local telescope = require("telescope.builtin")
 
 nnoremap('<leader>ff', function()
-  telescope.find_files()
+  telescope.find_files({ hidden = true })
 end)
 
 nnoremap('<leader>fs', function()

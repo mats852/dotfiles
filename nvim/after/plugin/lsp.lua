@@ -162,7 +162,7 @@ local servers = {
   'intelephense',
   'java_language_server',
   'kotlin_language_server',
-  'sumneko_lua',
+  'lua_ls',
   'tsserver',
 }
 
