@@ -3,6 +3,7 @@ env:
 
 font:
   normal:
+    # family: BigBlue_TerminalPlus Nerd Font
     family: Iosevka Nerd Font
     style: Regular
   size: 15

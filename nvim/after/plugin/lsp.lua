@@ -163,6 +163,7 @@ local servers = {
   'java_language_server',
   'kotlin_language_server',
   'lua_ls',
+  'rust_analyzer',
   'tsserver',
 }
 

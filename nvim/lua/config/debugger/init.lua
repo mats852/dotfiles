@@ -3,6 +3,7 @@ local dapui = require('dapui')
 local daptext = require("nvim-dap-virtual-text")
 
 require("config.debugger.go")
+require("config.debugger.lldb")
 
 local remap = require("config.keymap")
 local nnoremap = remap.nnoremap
