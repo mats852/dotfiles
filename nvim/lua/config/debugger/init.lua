@@ -1,6 +1,7 @@
 local dap = require("dap")
 local dapui = require('dapui')
 local daptext = require("nvim-dap-virtual-text")
+local dap_vscode = require('dap.ext.vscode')
 
 require("config.debugger.go")
 require("config.debugger.lldb")
@@ -14,6 +15,7 @@ vim.fn.sign_define('DapStopped', {text='👉', texthl='', linehl='', numhl=''})
 
 daptext.setup()
 dapui.setup()
+dap_vscode.load_launchjs(nil, { lldb = { 'rust', 'c', 'cpp' } })
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()

@@ -28,8 +28,6 @@ return require('packer').startup(function(use)
   }
 
   -- LSP, Syntax, Lint
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
   use 'dense-analysis/ale'
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'

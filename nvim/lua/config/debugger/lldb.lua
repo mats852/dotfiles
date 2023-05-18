@@ -9,7 +9,7 @@ dap.adapters.lldb = {
   },
 }
 
-dap.configurations.cpp = {
+dap.configurations.rust = {
   {
     name = 'Launch',
     type = 'lldb',
@@ -36,5 +36,5 @@ dap.configurations.cpp = {
   },
 }
 
-dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp
+dap.configurations.c = dap.configurations.rust
+dap.configurations.cpp = dap.configurations.rust
