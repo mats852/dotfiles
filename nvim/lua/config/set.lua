@@ -3,7 +3,7 @@ vim.opt.autoread = true
 vim.opt.errorbells = true
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir = "~/.vim/undodir"
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
 

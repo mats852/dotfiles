@@ -1,7 +1,13 @@
 #!/bin/bash
 
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P)
-DEST="$HOME/.config"
+
+if [[ "$OSTYPE" == "msys" ]]; then
+  DEST="$HOME/AppData/Local"
+else
+  DEST="$HOME/.config"
+fi
 
 mkdir -p $DEST
-ln -sf "$DIR" "$DEST"
+
+MSYS=winsymlinks:nativestrict ln -sf "$DIR" "$DEST"
