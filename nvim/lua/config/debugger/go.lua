@@ -11,6 +11,8 @@ dap.adapters.delve = {
   }
 }
 
+dap.adapters.go = dap.adapters.delve
+
 -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
 dap.configurations.go = {
   {
