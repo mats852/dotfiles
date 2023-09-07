@@ -52,10 +52,8 @@ __git_complete gda _git_diff
 alias gf='git fetch --all --progress --prune'
 __git_complete gda _git_fetch
 alias gi='git init'
-alias glg='git log --graph --oneline --decorate --all'
-__git_complete gdg _git_log
-alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
-__git_complete gdd _git_log
+alias glg='git log --graph --oneline --decorate'
+__git_complete glg _git_log
 alias gm='git merge --no-ff'
 __git_complete gm _git_merge
 alias gma='git merge --abort'
@@ -86,6 +84,9 @@ alias gstp='git stash pop'
 __git_complete gstp _git_stash
 alias gsts='git stash save'
 __git_complete gsts _git_stash
+
+function gl() { git log --oneline ^$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@') HEAD; }
+__git_complete gl _git_log
 
 # Git search by commit message
 function glf() { git log --all --grep="$1"; }
