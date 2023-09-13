@@ -10,7 +10,9 @@ vim.cmd([[
   \ 'vue': ['eslint'],
   \ 'php': ['php_cs_fixer'],
   \ 'go': ['gofmt', 'goimports', 'gofumpt'],
+  \ 'rust': ['rustfmt'],
   \ 'kotlin': ['ktlint'],
+  \ 'c': ['clang-format'],
   \ }
 ]])
 

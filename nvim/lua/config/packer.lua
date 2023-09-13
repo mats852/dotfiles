@@ -8,6 +8,7 @@ return require('packer').startup(function(use)
   use { 'catppuccin/nvim', as = 'catppuccin' }
 
   -- Programming
+  use 'simrat39/rust-tools.nvim'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
   use 'nelsyeung/twig.vim'
   use 'stephpy/vim-php-cs-fixer'
@@ -19,6 +20,7 @@ return require('packer').startup(function(use)
     'nvim-neotest/neotest',
     requires = {
       'nvim-neotest/neotest-go',
+      'nvim-neotest/neotest-jest',
       'nvim-neotest/neotest-plenary',
       'nvim-neotest/neotest-vim-test',
       'nvim-lua/plenary.nvim',

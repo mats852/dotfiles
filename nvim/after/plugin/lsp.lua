@@ -162,8 +162,10 @@ local servers = {
   'intelephense',
   'java_language_server',
   'kotlin_language_server',
+  'ocamllsp',
   'rust_analyzer',
   'tsserver',
+  'vuels',
 }
 
 for _, server in ipairs(servers) do

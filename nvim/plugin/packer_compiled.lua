@@ -119,11 +119,6 @@ _G.packer_plugins = {
     path = "/Users/mats/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
-  ["ctrlsf.vim"] = {
-    loaded = true,
-    path = "/Users/mats/.local/share/nvim/site/pack/packer/start/ctrlsf.vim",
-    url = "https://github.com/dyng/ctrlsf.vim"
-  },
   delimitmate = {
     loaded = true,
     path = "/Users/mats/.local/share/nvim/site/pack/packer/start/delimitmate",
@@ -134,11 +129,6 @@ _G.packer_plugins = {
     path = "/Users/mats/.local/share/nvim/site/pack/packer/start/diffview.nvim",
     url = "https://github.com/sindrets/diffview.nvim"
   },
-  fzf = {
-    loaded = true,
-    path = "/Users/mats/.local/share/nvim/site/pack/packer/start/fzf",
-    url = "https://github.com/junegunn/fzf"
-  },
   harpoon = {
     loaded = true,
     path = "/Users/mats/.local/share/nvim/site/pack/packer/start/harpoon",
@@ -148,16 +138,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mats/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
-  },
-  ["mason-lspconfig.nvim"] = {
-    loaded = true,
-    path = "/Users/mats/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
-    url = "https://github.com/williamboman/mason-lspconfig.nvim"
-  },
-  ["mason.nvim"] = {
-    loaded = true,
-    path = "/Users/mats/.local/share/nvim/site/pack/packer/start/mason.nvim",
-    url = "https://github.com/williamboman/mason.nvim"
   },
   neogit = {
     loaded = true,
@@ -172,7 +152,12 @@ _G.packer_plugins = {
   ["neotest-go"] = {
     loaded = true,
     path = "/Users/mats/.local/share/nvim/site/pack/packer/start/neotest-go",
-    url = "/Users/mats/code/neotest-go"
+    url = "https://github.com/nvim-neotest/neotest-go"
+  },
+  ["neotest-jest"] = {
+    loaded = true,
+    path = "/Users/mats/.local/share/nvim/site/pack/packer/start/neotest-jest",
+    url = "https://github.com/nvim-neotest/neotest-jest"
   },
   ["neotest-plenary"] = {
     loaded = true,
@@ -234,6 +219,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mats/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/Users/mats/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["twig.vim"] = {
     loaded = true,
