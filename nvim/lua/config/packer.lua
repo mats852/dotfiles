@@ -23,6 +23,10 @@ return require('packer').startup(function(use)
   use 'theHamsta/nvim-dap-virtual-text'
   use 'leoluz/nvim-dap-go'
   use 'vim-test/vim-test'
+  use {
+    'folke/trouble.nvim',
+    requires = 'nvim-tree/nvim-web-devicons'
+  }
 
   -- LSP, Syntax, Lint
   use 'dense-analysis/ale'
