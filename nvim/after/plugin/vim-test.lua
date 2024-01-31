@@ -7,3 +7,11 @@ vim.cmd([[
     \ 'nearest': '-v',
   \}
 ]])
+
+nnoremap('<F9>', function()
+  vim.cmd('TestNearest')
+end)
+
+nnoremap('<F10>', function()
+  vim.cmd('TestFile')
+end)

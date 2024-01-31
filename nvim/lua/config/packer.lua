@@ -9,25 +9,20 @@ return require('packer').startup(function(use)
 
   -- Programming
   use 'simrat39/rust-tools.nvim'
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    requires = {
+      'nvim-treesitter/nvim-treesitter-refactor',
+    }
+  }
   use 'nelsyeung/twig.vim'
   use 'stephpy/vim-php-cs-fixer'
   use 'mfussenegger/nvim-dap'
   use {'rcarriga/nvim-dap-ui', requires = 'mfussenegger/nvim-dap'}
   use 'theHamsta/nvim-dap-virtual-text'
   use 'leoluz/nvim-dap-go'
-  use {
-    'nvim-neotest/neotest',
-    requires = {
-      'nvim-neotest/neotest-go',
-      'nvim-neotest/neotest-jest',
-      'nvim-neotest/neotest-plenary',
-      'nvim-neotest/neotest-vim-test',
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      'antoinemadec/FixCursorHold.nvim'
-    }
-  }
+  use 'vim-test/vim-test'
 
   -- LSP, Syntax, Lint
   use 'dense-analysis/ale'
@@ -46,7 +41,7 @@ return require('packer').startup(function(use)
 
   -- UI
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    'nvim-telescope/telescope.nvim', tag = '0.1.4',
     requires = 'nvim-lua/plenary.nvim'
   }
   use {

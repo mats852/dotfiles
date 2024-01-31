@@ -27,7 +27,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Language switching
-exec_always "setxkbmap -layout us,ca -variant ,multix -option 'grp:alt_shift_toggle'"
+# exec_always "setxkbmap -layout us,ca -variant ,multix -option 'grp:alt_shift_toggle'"
 
 # Screenshots
 bindsym Print exec flameshot full -p ~/Pictures
@@ -180,5 +180,3 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
-
-
