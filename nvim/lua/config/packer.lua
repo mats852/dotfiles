@@ -19,7 +19,13 @@ return require('packer').startup(function(use)
   use 'nelsyeung/twig.vim'
   use 'stephpy/vim-php-cs-fixer'
   use 'mfussenegger/nvim-dap'
-  use {'rcarriga/nvim-dap-ui', requires = 'mfussenegger/nvim-dap'}
+  use {
+    'rcarriga/nvim-dap-ui',
+    requires = {
+      'nvim-neotest/nvim-nio',
+      'mfussenegger/nvim-dap',
+    }
+  }
   use 'theHamsta/nvim-dap-virtual-text'
   use 'leoluz/nvim-dap-go'
   use 'vim-test/vim-test'
@@ -60,7 +66,7 @@ return require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-  use 'airblade/vim-gitgutter'
+  -- use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-surround'
   use 'preservim/vimux'

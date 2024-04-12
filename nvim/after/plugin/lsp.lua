@@ -164,10 +164,15 @@ local servers = {
   'kotlin_language_server',
   'ocamllsp',
   'rust_analyzer',
+  'templ',
   'tsserver',
   'vuels',
+  'zls',
 }
 
 for _, server in ipairs(servers) do
   nvim_lsp[server].setup(config())
 end
+
+-- Templ files are not supported out of the box it seems
+vim.filetype.add({ extension = { templ = "templ" } })
