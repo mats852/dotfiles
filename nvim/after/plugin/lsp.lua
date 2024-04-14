@@ -2,7 +2,6 @@ local nvim_lsp = require('lspconfig')
 local remap = require("config.keymap")
 local cmp = require("cmp")
 local luasnip = require("luasnip")
-local inoremap = remap.inoremap
 local nnoremap = remap.nnoremap
 
 cmp.setup({
@@ -77,6 +76,16 @@ cmp.setup.cmdline(':', {
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  if client.server_capabilities.documentFormattingProvider then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("Format", { clear = true }),
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ async = false })
+      end
+    })
+  end
+
   -- See `:help vim.lsp.*` for documentation on any of the below functions
 
   nnoremap("gD", function()
@@ -139,17 +148,30 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 local function config(_config)
   _config = _config or {}
 
-  _setup = {
+  local setup = {
     on_attach = on_attach,
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
     flags = {
       debounce_text_changes = 150,
+    },
+    settings = {
+      gopls = {
+        usePlaceholders = true,
+        analyses = {
+          unusedparams = true,
+          shadow = true,
+        },
+        staticcheck = true,
+        gofumpt = true,
+      }
     }
   }
 
-  for k,v in pairs(_config) do _setup[k] = v end
+  for k,v in pairs(_config) do
+    setup[k] = v
+  end
 
-  return _setup
+  return setup
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -162,6 +184,7 @@ local servers = {
   'intelephense',
   'java_language_server',
   'kotlin_language_server',
+  'lua_ls',
   'ocamllsp',
   'rust_analyzer',
   'templ',
@@ -176,3 +199,4 @@ end
 
 -- Templ files are not supported out of the box it seems
 vim.filetype.add({ extension = { templ = "templ" } })
+vim.api.nvim_create_autocmd({ "BufWritePre" }, { pattern = { "*.templ" }, callback = vim.lsp.buf.format })

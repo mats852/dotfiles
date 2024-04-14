@@ -35,7 +35,6 @@ return require('packer').startup(function(use)
   }
 
   -- LSP, Syntax, Lint
-  use 'dense-analysis/ale'
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -66,7 +65,7 @@ return require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-  -- use 'airblade/vim-gitgutter'
+  use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-surround'
   use 'preservim/vimux'
