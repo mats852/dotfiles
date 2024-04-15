@@ -1,6 +1,7 @@
 local nnoremap = require("config.keymap").nnoremap
 
 local dap = require("dap")
+local dapgo = require("dap-go")
 
 dap.adapters.delve = {
   type = 'server',
@@ -38,22 +39,6 @@ dap.configurations.go = {
   }
 }
 
-local function debug_test(testname)
-  dap.run({
-      type = "delve",
-      name = testname,
-      request = "launch",
-      mode = "test",
-      program = "./${relativeFileDirname}",
-      args = {
-        "-testify.m",
-        testname,
-      },
-  })
-end
-
-nnoremap("<leader>dt", function()
-  local testName = vim.fn.input("Test function name: ", "", "file")
-
-  debug_test(testName)
+nnoremap('<F8>', function()
+  dapgo.debug_test()
 end)

@@ -188,6 +188,7 @@ local servers = {
   'ocamllsp',
   'rust_analyzer',
   'templ',
+  'terraformls',
   'tsserver',
   'vuels',
   'zls',
