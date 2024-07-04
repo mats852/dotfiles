@@ -77,13 +77,7 @@ cmp.setup.cmdline(':', {
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   if client.server_capabilities.documentFormattingProvider then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = vim.api.nvim_create_augroup("Format", { clear = true }),
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format({ async = false })
-      end
-    })
+    client.server_capabilities.documentFormattingProvider = false
   end
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -187,6 +181,7 @@ local servers = {
   'lua_ls',
   'ocamllsp',
   'rust_analyzer',
+  'sourcekit',
   'templ',
   'terraformls',
   'tsserver',
@@ -197,6 +192,31 @@ local servers = {
 for _, server in ipairs(servers) do
   nvim_lsp[server].setup(config())
 end
+
+nvim_lsp.efm.setup {
+  on_attach = function(client, bufnr)
+    if client.server_capabilities.documentFormattingProvider then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = vim.api.nvim_create_augroup("Format", { clear = true }),
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ async = false })
+        end
+      })
+    end
+  end,
+  init_options = {
+    documentFormatting = true,
+    documentRangeFormatting = true,
+    hover = true,
+    documentSymbol = true,
+    codeAction = true,
+    completion = true,
+  },
+  settings = {
+    rootMarkers = {".git/"},
+  }
+}
 
 -- Templ files are not supported out of the box it seems
 vim.filetype.add({ extension = { templ = "templ" } })
