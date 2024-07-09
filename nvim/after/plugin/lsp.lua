@@ -77,7 +77,15 @@ cmp.setup.cmdline(':', {
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   if client.server_capabilities.documentFormattingProvider then
-    client.server_capabilities.documentFormattingProvider = false
+    -- client.server_capabilities.documentFormattingProvider = false
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("Format", { clear = true }),
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ async = false })
+      end
+    })
   end
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -144,21 +152,7 @@ local function config(_config)
 
   local setup = {
     on_attach = on_attach,
-    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
-    flags = {
-      debounce_text_changes = 150,
-    },
-    settings = {
-      gopls = {
-        usePlaceholders = true,
-        analyses = {
-          unusedparams = true,
-          shadow = true,
-        },
-        staticcheck = true,
-        gofumpt = true,
-      }
-    }
+    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   }
 
   for k,v in pairs(_config) do
@@ -171,52 +165,62 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = {
-  'clangd',
-  'erlangls',
-  'html',
-  'gopls',
-  'intelephense',
-  'java_language_server',
-  'kotlin_language_server',
-  'lua_ls',
-  'ocamllsp',
-  'rust_analyzer',
-  'sourcekit',
-  'templ',
-  'terraformls',
-  'tsserver',
-  'vuels',
-  'zls',
-}
-
-for _, server in ipairs(servers) do
-  nvim_lsp[server].setup(config())
-end
-
-nvim_lsp.efm.setup {
-  on_attach = function(client, bufnr)
-    if client.server_capabilities.documentFormattingProvider then
+  clangd = {},
+  erlangls = {},
+  html = {},
+  gopls = {
+    settings = {
+      gopls = {
+        usePlaceholders = true,
+        analyses = {
+          unusedparams = true,
+          shadow = true,
+        },
+        staticcheck = true,
+        gofumpt = true,
+      }
+    }
+  },
+  intelephense = {},
+  java_language_server = {},
+  kotlin_language_server = {},
+  lua_ls = {},
+  ocamllsp = {},
+  rust_analyzer = {},
+  sourcekit = {
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      -- Use swift format on save
       vim.api.nvim_create_autocmd("BufWritePre", {
-        group = vim.api.nvim_create_augroup("Format", { clear = true }),
+        group = vim.api.nvim_create_augroup("SwiftFormat", { clear = true }),
         buffer = bufnr,
         callback = function()
-          vim.lsp.buf.format({ async = false })
+          bufnr = bufnr or vim.api.nvim_get_current_buf()
+          local filepath = vim.api.nvim_buf_get_name(bufnr)
+          local content = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
+
+          -- Run swift format command
+          local output = vim.fn.system("swift format --assume-filename " .. filepath, content)
+          if vim.v.shell_error == 0 then
+            local formatted = vim.split(output, "\n")
+            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, formatted)
+          else
+            vim.notify("Swift Format Error: " .. output, vim.log.levels.ERROR)
+          end
         end
       })
     end
-  end,
-  init_options = {
-    documentFormatting = true,
-    documentRangeFormatting = true,
-    hover = true,
-    documentSymbol = true,
-    codeAction = true,
-    completion = true,
   },
-  settings = {
-    rootMarkers = {".git/"},
-  }
+  templ = {},
+  terraformls = {},
+  tsserver = {},
+  vuels = {},
+  zls = {},
 }
+
+for server, cfg in pairs(servers) do
+  nvim_lsp[server].setup(config(cfg))
+end
 
 -- Templ files are not supported out of the box it seems
 vim.filetype.add({ extension = { templ = "templ" } })
