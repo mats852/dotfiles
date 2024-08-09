@@ -18,7 +18,7 @@
         nixosGraphical = nixpkgs.lib.nixosSystem {
           inherit pkgs;
           modules = [
-            ./nix/system/nixos-graphical.nix
+            ./system/nixos-graphical.nix
             home-manager.nixosModules.home-manager
           ];
         };

@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "mats";
@@ -28,10 +30,6 @@
     flameshot
 
     (pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; })
-
-    (nodejs.withPackages (p: [ 
-      p.vscode-langservers-extracted
-    ]))
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -57,10 +55,10 @@
       fi
     '';
 
-    ".config/nvim".source = /home/mats/.dotfiles/nvim;
-    ".config/alacritty/alacritty.toml".source = /home/mats/.dotfiles/alacritty/alacritty.toml;
-    ".tmux.conf".source = /home/mats/.dotfiles/tmux/.tmux.conf;
-    ".config/i3/config".source = /home/mats/.dotfiles/i3/config;
+    ".config/nvim".source = ../../nvim;
+    ".config/alacritty/alacritty.toml".source = ../../alacritty/alacritty.toml;
+    ".tmux.conf".source = ../../tmux/.tmux.conf;
+    ".config/i3/config".source = ../../i3/config;
   };  
 
   # Home Manager can also manage your environment variables through
@@ -86,6 +84,7 @@
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/go/bin"
+    "$HOME/.npm-global"
   ];
 
   # ----- Programs -----
