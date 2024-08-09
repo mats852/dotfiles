@@ -1,36 +1,37 @@
 {
-  description = "Flake for managing dotfiles and configurations";
+  description = "Multi-environment NixOS and Nix configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-stable"; 
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
-    nixosConfigurations = {
-      hostname = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./nixos/configuration.nix
-          home-manager.nixosModules.home-manager
-        ];
+  outputs = { self, nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+    in {
+      nixosConfigurations = {
+        nixosGraphical = nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+          modules = [
+            ./nix/system/nixos-graphical.nix
+            home-manager.nixosModules.home-manager
+          ];
+        };
+      };
+
+      homeConfigurations = {
+        graphical = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./home/graphical.nix
+          ];
+        };
       };
     };
-
-    homeConfigurations = {
-      username = home-manager.lib.homeManagerConfiguration {
-        system = "x86_64-linux"; 
-        homeDirectory = "/home/mats"; 
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-        modules = [
-          ./home/home.nix
-        ];
-      };
-    };
-  };
 }
 

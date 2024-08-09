@@ -12,7 +12,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "black-spectre.home.arpa"; # Define your hostname.
+  networking.hostName = "black-spectre"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -107,29 +107,11 @@
     home-manager
     gnumake
     gcc
-    ripgrep
-    git
     vim
     neovim
-    alacritty
-    tmux
-    go_1_22
-    nodejs_22
-    discord
-    google-chrome
-    flameshot
-  ];
-    
-  programs._1password.enable = true;
-  programs._1password-gui = {
-    enable = true;
-    # Certain features, including CLI integration and system authentication support,
-    # require enabling PolKit integration on some desktop environments (e.g. Plasma).
-    polkitPolicyOwners = [ "mats" ];
-  };
-  
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Iosevka" ]; })
+    git
+    xclip
+    ripgrep
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

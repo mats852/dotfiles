@@ -19,19 +19,19 @@
   # environment.
   home.packages = with pkgs; [
     starship
+    alacritty
+    tmux
+    go_1_22
+    nodejs_22
+    discord
+    google-chrome
+    flameshot
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    (pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; })
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    (nodejs.withPackages (p: [ 
+      p.vscode-langservers-extracted
+    ]))
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -92,4 +92,12 @@
   programs.home-manager.enable = true;
 
   programs.starship.enable = true;
+    
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    # Certain features, including CLI integration and system authentication support,
+    # require enabling PolKit integration on some desktop environments (e.g. Plasma).
+    polkitPolicyOwners = [ "mats" ];
+  };
 }
