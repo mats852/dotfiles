@@ -84,6 +84,10 @@ local on_attach = function(client, bufnr)
       buffer = bufnr,
       callback = function()
         vim.lsp.buf.format({ async = false })
+
+        -- if vim.bo.filetype == 'go' then
+        --   vim.cmd('silent! %!goimports')
+        -- end
       end
     })
   end
