@@ -217,7 +217,7 @@ local servers = {
   -- },
   templ = {},
   terraformls = {},
-  tsserver = {},
+  ts_ls = {},
   vuels = {},
   zls = {},
 }
