@@ -3,6 +3,8 @@ local dapui = require('dapui')
 local daptext = require("nvim-dap-virtual-text")
 local dap_vscode = require('dap.ext.vscode')
 
+require("dap-python").setup("python3")
+
 require("config.debugger.go")
 require("config.debugger.lldb")
 

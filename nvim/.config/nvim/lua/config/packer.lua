@@ -18,7 +18,12 @@ return require('packer').startup(function(use)
   }
   use 'nelsyeung/twig.vim'
   use 'stephpy/vim-php-cs-fixer'
-  use 'mfussenegger/nvim-dap'
+  use {
+    'mfussenegger/nvim-dap',
+    requires = {
+      'mfussenegger/nvim-dap-python'
+    }
+  }
   use {
     'rcarriga/nvim-dap-ui',
     requires = {

@@ -5,16 +5,16 @@ local luasnip = require("luasnip")
 local nnoremap = remap.nnoremap
 
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
-	},
-	mapping = cmp.mapping.preset.insert({
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -22,7 +22,7 @@ cmp.setup({
       end
       fallback()
     end
-    , { 'i', 'c' }),
+      , { 'i', 'c' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -30,19 +30,19 @@ cmp.setup({
       end
       fallback()
     end
-    , { 'i', 'c' }),
-		['<C-b>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.abort(),
-		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-	}),
-	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' },
-	}, {
-		{ name = 'buffer' },
-	})
+      , { 'i', 'c' }),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  }, {
+    { name = 'buffer' },
+  })
 })
 
 -- Set configuration for specific filetype.
@@ -159,7 +159,7 @@ local function config(_config)
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   }
 
-  for k,v in pairs(_config) do
+  for k, v in pairs(_config) do
     setup[k] = v
   end
 
@@ -170,8 +170,11 @@ end
 -- map buffer local keybindings when the language server attaches
 local servers = {
   clangd = {},
+  elixirls = {
+    cmd = { '/opt/elixir-ls/v0.23.0/language_server.sh' }
+  },
   erlangls = {},
-  html = {},
+  eslint = {},
   gopls = {
     settings = {
       gopls = {
@@ -185,6 +188,7 @@ local servers = {
       }
     }
   },
+  -- html = {},
   intelephense = {},
   java_language_server = {},
   kotlin_language_server = {},
@@ -217,8 +221,8 @@ local servers = {
   -- },
   templ = {},
   terraformls = {},
-  ts_ls = {},
-  vuels = {},
+  tsserver = {},
+  volar = {},
   zls = {},
 }
 
