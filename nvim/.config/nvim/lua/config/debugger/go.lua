@@ -20,14 +20,16 @@ dap.configurations.go = {
     type = "delve",
     name = "Debug",
     request = "launch",
-    program = "${file}"
+    program = "${file}",
+    buildFlags = dapgo.get_build_flags,
   },
   {
     type = "delve",
     name = "Debug test", -- configuration for debugging test files
     request = "launch",
     mode = "test",
-    program = "${file}"
+    program = "${file}",
+    buildFlags = dapgo.get_build_flags,
   },
   -- works with go.mod packages and sub packages
   {
@@ -36,6 +38,7 @@ dap.configurations.go = {
     request = "launch",
     mode = "test",
     program = "./${relativeFileDirname}",
+    buildFlags = dapgo.get_build_flags,
   }
 }
 

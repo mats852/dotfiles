@@ -17,6 +17,13 @@ daptext.setup()
 dapui.setup()
 dap_vscode.load_launchjs(nil, { lldb = { 'rust', 'c', 'cpp' } })
 
+dap.defaults.terminate_on_exit = false
+
+dap.listeners.after.event_terminated["dapui_config"] = function()
+  -- You can comment out this line to prevent dap-ui from closing automatically
+  -- dapui.close()
+end
+
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end
