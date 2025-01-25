@@ -53,6 +53,13 @@ return require('packer').startup(function(use)
   -- Utils
   use 'nvim-lua/plenary.nvim'
 
+  -- use {
+  --   'stevearc/oil.nvim',
+  --   config = function()
+  --     require("oil").setup()
+  --   end,
+  -- }
+
   -- UI
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.4',
