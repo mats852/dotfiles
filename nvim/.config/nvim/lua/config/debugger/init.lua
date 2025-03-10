@@ -17,7 +17,6 @@ vim.fn.sign_define('DapStopped', {text='👉', texthl='', linehl='', numhl=''})
 
 daptext.setup()
 dapui.setup()
-dap_vscode.load_launchjs(nil, { lldb = { 'rust', 'c', 'cpp', 'zig' } })
 
 dap.defaults.terminate_on_exit = false
 

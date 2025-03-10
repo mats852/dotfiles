@@ -4,5 +4,5 @@ local nnoremap = remap.nnoremap
 local trouble = require("trouble")
 
 nnoremap('<leader>tt', function()
-  trouble.toggle()
+  trouble.toggle('diagnostics')
 end)
