@@ -222,7 +222,7 @@ local servers = {
   templ = {},
   terraformls = {},
   ts_ls = {},
-  vuels = {},
+  volar = {},
   zls = {},
 }
 
