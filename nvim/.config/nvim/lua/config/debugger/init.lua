@@ -1,14 +1,15 @@
-local dap = require("dap")
+local dap = require('dap')
 local dapui = require('dapui')
-local daptext = require("nvim-dap-virtual-text")
+local daptext = require('nvim-dap-virtual-text')
 local dap_vscode = require('dap.ext.vscode')
 
-require("dap-python").setup("python3")
+require('dap-python').setup('python3')
 
-require("config.debugger.go")
-require("config.debugger.lldb")
+require('config.debugger.go')
+require('config.debugger.gdb')
+require('config.debugger.lldb')
 
-local remap = require("config.keymap")
+local remap = require('config.keymap')
 local nnoremap = remap.nnoremap
 
 vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})

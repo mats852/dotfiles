@@ -22,7 +22,7 @@ cmp.setup({
       end
       fallback()
     end
-      , { 'i', 'c' }),
+    , { 'i', 'c' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -30,7 +30,7 @@ cmp.setup({
       end
       fallback()
     end
-      , { 'i', 'c' }),
+    , { 'i', 'c' }),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -191,6 +191,7 @@ local servers = {
   -- html = {},
   intelephense = {},
   java_language_server = {},
+  jsonls = {},
   kotlin_language_server = {},
   lua_ls = {},
   ocamllsp = {},

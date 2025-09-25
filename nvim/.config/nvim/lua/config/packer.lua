@@ -66,8 +66,13 @@ return require('packer').startup(function(use)
     requires = 'nvim-lua/plenary.nvim'
   }
   use {
-    'TimUntersberger/neogit',
-    requires = 'nvim-lua/plenary.nvim',
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",        -- optional
+
+      "nvim-telescope/telescope.nvim", -- optional
+    },
   }
   use {
     'ThePrimeagen/harpoon',

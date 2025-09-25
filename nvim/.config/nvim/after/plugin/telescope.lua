@@ -21,7 +21,9 @@ nnoremap('<leader>ff', function()
 end)
 
 nnoremap('<leader>fs', function()
-  telescope_builtin.live_grep()
+  telescope_builtin.live_grep({
+    additional_args = function() return { "--hidden" } end
+  })
 end)
 
 nnoremap('<leader>fb', function()
