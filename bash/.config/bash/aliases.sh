@@ -21,7 +21,9 @@ alias gau='git add --update'
 __git_complete gau _git_add
 alias gb='git branch'
 __git_complete gb _git_branch
-alias gbd='git branch --delete '
+alias gcob='git checkout -b'
+__git_complete gcob _git_checkout
+alias gbd='git branch --delete'
 __git_complete gb _git_branch
 alias gc='git commit'
 __git_complete gc _git_commit
@@ -76,10 +78,6 @@ __git_complete gl _git_log
 
 # Git search by commit message
 function glf() { git log --all --grep="$1"; }
-
-# Git create branch and set upstream
-function gcob() { git checkout -b $1 && git push --set-upstream --no-verify origin $1; }
-__git_complete gcob _git_checkout
 
 # Get branch original commit hash
 # Useful for interactive rebase "squash": git rebase -i $(gboh)
