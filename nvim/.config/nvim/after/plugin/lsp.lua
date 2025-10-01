@@ -195,6 +195,7 @@ local servers = {
   kotlin_language_server = {},
   lua_ls = {},
   ocamllsp = {},
+  basedpyright = {},
   rust_analyzer = {},
   -- sourcekit = {
   --   on_attach = function(client, bufnr)

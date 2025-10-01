@@ -30,3 +30,11 @@ vim.opt.cmdheight = 1
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 vim.g.mapleader = " "
+
+-- Formatting
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "json",
+  callback = function()
+    vim.opt_local.formatprg = "jq"
+  end,
+})
