@@ -1,4 +1,3 @@
-local nvim_lsp = require('lspconfig')
 local remap = require("config.keymap")
 local cmp = require("cmp")
 local luasnip = require("luasnip")
@@ -224,12 +223,13 @@ local servers = {
   templ = {},
   terraformls = {},
   ts_ls = {},
-  volar = {},
+  vue_ls = {},
   zls = {},
 }
 
 for server, cfg in pairs(servers) do
-  nvim_lsp[server].setup(config(cfg))
+  vim.lsp.config[server] = config(cfg)
+  vim.lsp.enable(server)
 end
 
 -- Templ files are not supported out of the box it seems
