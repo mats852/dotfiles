@@ -21,7 +21,7 @@ cmp.setup({
       end
       fallback()
     end
-    , { 'i', 'c' }),
+      , { 'i', 'c' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -29,7 +29,7 @@ cmp.setup({
       end
       fallback()
     end
-    , { 'i', 'c' }),
+      , { 'i', 'c' }),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -71,22 +71,18 @@ cmp.setup.cmdline(':', {
   })
 })
 
+-- Create augroup once for LSP formatting
+local format_augroup = vim.api.nvim_create_augroup("LspFormat", { clear = true })
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   if client.server_capabilities.documentFormattingProvider then
-    -- client.server_capabilities.documentFormattingProvider = false
-
     vim.api.nvim_create_autocmd("BufWritePre", {
-      group = vim.api.nvim_create_augroup("Format", { clear = true }),
+      group = format_augroup,
       buffer = bufnr,
       callback = function()
         vim.lsp.buf.format({ async = false })
-
-        -- if vim.bo.filetype == 'go' then
-        --   vim.cmd('silent! %!goimports')
-        -- end
       end
     })
   end
@@ -168,12 +164,12 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = {
+  biome = {},
   clangd = {},
   elixirls = {
     cmd = { '/opt/elixir-ls/v0.23.0/language_server.sh' }
   },
   erlangls = {},
-  eslint = {},
   gopls = {
     settings = {
       gopls = {
@@ -224,6 +220,23 @@ local servers = {
   terraformls = {},
   ts_ls = {},
   vue_ls = {},
+  vtsls = {
+    settings = {
+      vtsls = {
+        tsserver = {
+          globalPlugins = {
+            {
+              name = '@vue/typescript-plugin',
+              location = '~/.nvm/versions/node/v22.17.1/bin/vue-language-server',
+              languages = { 'vue' },
+              configNamespace = 'typescript',
+            },
+          },
+        },
+      },
+    },
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  },
   zls = {},
 }
 
