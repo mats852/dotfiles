@@ -192,30 +192,15 @@ local servers = {
   ocamllsp = {},
   basedpyright = {},
   rust_analyzer = {},
-  -- sourcekit = {
-  --   on_attach = function(client, bufnr)
-  --     on_attach(client, bufnr)
-  --     -- Use swift format on save
-  --     vim.api.nvim_create_autocmd("BufWritePre", {
-  --       group = vim.api.nvim_create_augroup("SwiftFormat", { clear = true }),
-  --       buffer = bufnr,
-  --       callback = function()
-  --         bufnr = bufnr or vim.api.nvim_get_current_buf()
-  --         local filepath = vim.api.nvim_buf_get_name(bufnr)
-  --         local content = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
-
-  --         -- Run swift format command
-  --         local output = vim.fn.system("swift format --assume-filename " .. filepath, content)
-  --         if vim.v.shell_error == 0 then
-  --           local formatted = vim.split(output, "\n")
-  --           vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, formatted)
-  --         else
-  --           vim.notify("Swift Format Error: " .. output, vim.log.levels.ERROR)
-  --         end
-  --       end
-  --     })
-  --   end
-  -- },
+  sourcekit = {
+    capabilities = {
+      workspace = {
+        didChangeWatchedFiles = {
+          dynamicRegistration = true,
+        },
+      },
+    },
+  },
   templ = {},
   terraformls = {},
   ts_ls = {},
