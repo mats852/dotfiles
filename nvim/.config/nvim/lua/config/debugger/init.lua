@@ -8,6 +8,7 @@ require('dap-python').setup('python3')
 require('config.debugger.go')
 require('config.debugger.gdb')
 require('config.debugger.lldb')
+require('config.debugger.swift')
 
 local remap = require('config.keymap')
 local nnoremap = remap.nnoremap
