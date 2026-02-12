@@ -21,7 +21,7 @@ cmp.setup({
       end
       fallback()
     end
-      , { 'i', 'c' }),
+    , { 'i', 'c' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -29,7 +29,7 @@ cmp.setup({
       end
       fallback()
     end
-      , { 'i', 'c' }),
+    , { 'i', 'c' }),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -77,6 +77,10 @@ local format_augroup = vim.api.nvim_create_augroup("LspFormat", { clear = true }
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  if client.name == "sourcekit" then
+    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+  end
+
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = format_augroup,
@@ -193,6 +197,7 @@ local servers = {
   basedpyright = {},
   rust_analyzer = {},
   sourcekit = {
+    cmd = { vim.fn.expand('~/.local/bin/sourcekit-lsp') },
     capabilities = {
       workspace = {
         didChangeWatchedFiles = {
