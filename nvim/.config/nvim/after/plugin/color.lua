@@ -1,5 +1,5 @@
-vim.g.catppuccin_flavour = "latte" -- latte, frappe, macchiato, mocha
-require("catppuccin").setup()
+-- vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+require('monokai-pro').setup()
 
-vim.cmd [[colorscheme catppuccin]]
+-- vim.cmd [[colorscheme catppuccin]]
 require('lualine').setup()

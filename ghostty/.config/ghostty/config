@@ -1,16 +1,3 @@
 font-family = Iosevka Nerd Font
-theme = catppuccin-latte.conf
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+theme = "Monokai Pro"
+# theme = catppuccin-mocha.conf
